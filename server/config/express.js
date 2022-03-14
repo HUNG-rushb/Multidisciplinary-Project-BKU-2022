@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const thoughtRoutes = require('../routes/thoughtRoutes');
+const TestRoutes = require('../routes/TestRoutes');
 const cors = require('cors');
 
 const ExpressApp = () => {
@@ -13,7 +13,7 @@ const ExpressApp = () => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   //   app.use('/api/users', require('./routes/api/users'));
-  app.use('/api/thought', thoughtRoutes);
+  app.use('/api/thought', TestRoutes);
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../client/build')));
     app.get('*', function (req, res) {
