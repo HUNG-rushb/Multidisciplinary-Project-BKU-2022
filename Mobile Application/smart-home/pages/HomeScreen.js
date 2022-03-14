@@ -1,22 +1,25 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
+import { NativeBaseProvider, Box, Icon } from "native-base";
+import { Entypo } from "@native-base/icons";
 
 const HomeScreen = (props) => {
-  //   return <View style={styles.header}></View>;
+  const pressHandler = () => {
+    // props.navigation.navigate({ routeName: "Settings" });
+  };
+
+  // return <Button title="Test" style={styles.button} onPress={pressHandler} />;
   return (
-    <Button
-      onPress={() => {
-        props.navigation.navigate({ routeName: "Settings" });
-      }}
-    >
-      {" "}
-      Test{" "}
-    </Button>
+    <NativeBaseProvider>
+      <Box>Hello world</Box>
+      <Icon as={Entypo} name="user" />
+    </NativeBaseProvider>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
+  button: {
     width: "100%",
+    backgroundColor: "red",
   },
 });
 
