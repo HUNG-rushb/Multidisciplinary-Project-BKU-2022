@@ -31,22 +31,22 @@ connection.once('open', () => {
   console.log('MongoDB database connected');
 
   console.log('Setting change streams');
-  const thoughtChangeStream = connection.collection('thoughts').watch();
+  const testChangeStream = connection.collection('tests').watch();
 
-  thoughtChangeStream.on('change', (change) => {
+  testChangeStream.on('change', (change) => {
     switch (change.operationType) {
       case 'insert':
-        const thought = {
+        const test = {
           _id: change.fullDocument._id,
           name: change.fullDocument.name,
           description: change.fullDocument.description,
         };
 
-        io.of('/api/socket').emit('newThought', thought);
+        io.of('/api/socket').emit('newTest', test);
         break;
 
       case 'delete':
-        io.of('/api/socket').emit('deletedThought', change.documentKey._id);
+        io.of('/api/socket').emit('deletedTest', change.documentKey._id);
         break;
     }
   });

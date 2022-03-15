@@ -13,11 +13,11 @@ const ExpressApp = () => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   //   app.use('/api/users', require('./routes/api/users'));
-  app.use('/api/thought', TestRoutes);
+  app.use('/api', TestRoutes);
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../../client/build')));
+    app.use(express.static(path.join(__dirname, '../../webclient/build')));
     app.get('*', function (req, res) {
-      res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+      res.sendFile(path.join(__dirname, '../../webclient/build', 'index.html'));
     });
   }
 

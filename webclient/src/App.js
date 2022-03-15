@@ -1,11 +1,12 @@
-import NavBar from './components/NavBar/NavBar';
+// import NavBar from './components/NavBar/NavBar';
+import TestDashboard from './components/Test/TestDashboard';
 
-function App() {
+const App = () => {
   return (
     <div className='App'>
-      <NavBar></NavBar>
+      <TestDashboard />
     </div>
   );
-}
+};
 
 export default App;

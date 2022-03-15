@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server",
-    "client": "npm start --prefix client",
+    "server": "cd server && nodemon server",
+    "client": "cd webclient && npm run start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "cd webclient && npm install && npm run build"
   },
   "author": "Andrew Quang",
   "license": "MIT",
