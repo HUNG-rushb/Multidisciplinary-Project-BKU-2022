@@ -1,10 +1,10 @@
 {
-  "name": "my-devconnector",
+  "name": "ces-smart-house",
   "version": "1.0.0",
-  "description": "Social Network for developers",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "cd server && node server",
     "server": "cd server && nodemon server",
     "client": "cd webclient && npm run start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
