@@ -1,10 +1,12 @@
-const express = require('./config/express.js');
-const connectDB = require('./config/db');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');
-// const path = require('path');
 
+const express = require('./config/express.js');
+const connectDB = require('./config/db');
+const getDataInterval = require('./fetchroutes/simplefetch.js');
+
+// Setting path
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -24,10 +26,10 @@ httpServer.listen(PORT, () =>
 );
 
 connectDB();
-
 const connection = mongoose.connection;
 
 connection.once('open', () => {
+  getDataInterval;
   console.log('MongoDB database connected');
 
   console.log('Setting change streams');
