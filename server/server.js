@@ -35,23 +35,26 @@ connection.once('open', () => {
   console.log('MongoDB database connected');
 
   console.log('Setting change streams');
-  const testChangeStream = connection.collection('tests').watch();
 
-  testChangeStream.on('change', (change) => {
+  const DeviceChangeStream = connection.collection('devices').watch();
+
+  DeviceChangeStream.on('change', (change) => {
     switch (change.operationType) {
       case 'insert':
-        const test = {
+        const device = {
           _id: change.fullDocument._id,
+          key: change.fullDocument.key,
           name: change.fullDocument.name,
           description: change.fullDocument.description,
+          data: change.fullDocument.data,
         };
-
-        io.of('/api/socket').emit('newTest', test);
+        console.log(device);
+        io.of('/api/socket').emit('newTest', device);
         break;
 
-      case 'delete':
-        io.of('/api/socket').emit('deletedTest', change.documentKey._id);
-        break;
+      // case 'delete':
+      //   io.of('/api/socket').emit('deletedTest', change.documentKey._id);
+      //   break;
     }
   });
 });

@@ -20,11 +20,11 @@ const DeviceSchema = new Schema({
   },
   data: [
     {
-      id: {
+      data_id: {
         type: String,
       },
       value: {
-        type: Number,
+        type: String,
       },
       created_at: {
         type: Date,
