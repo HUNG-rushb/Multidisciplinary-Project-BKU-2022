@@ -2,8 +2,10 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const TestRoutes = require('../routes/TestRoutes');
 const cors = require('cors');
+
+// const TestRoutes = require('../routes/TestRoutes');
+const DeviceRoutes = require('../routes/DeviceRoutes');
 
 const ExpressApp = () => {
   //  initialize app
@@ -12,8 +14,12 @@ const ExpressApp = () => {
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+
   //   app.use('/api/users', require('./routes/api/users'));
-  app.use('/api', TestRoutes);
+  // ! THIS IS FOR TESTING PURPOSE
+  // app.use('/api', TestRoutes);
+  app.use('/api', DeviceRoutes);
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../webclient/build')));
     app.get('*', function (req, res) {

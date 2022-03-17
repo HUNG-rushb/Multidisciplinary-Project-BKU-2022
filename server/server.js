@@ -1,10 +1,12 @@
-const express = require('./config/express.js');
-const connectDB = require('./config/db');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');
-// const path = require('path');
 
+const express = require('./config/express.js');
+const connectDB = require('./config/db');
+const fetchInterval = require('./fetchroutes/fetch');
+
+// Setting path
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -24,30 +26,35 @@ httpServer.listen(PORT, () =>
 );
 
 connectDB();
-
 const connection = mongoose.connection;
 
 connection.once('open', () => {
+  // Fetch api from Adafruit at Interval of 5 seconds
+  fetchInterval;
+
   console.log('MongoDB database connected');
 
   console.log('Setting change streams');
-  const testChangeStream = connection.collection('tests').watch();
 
-  testChangeStream.on('change', (change) => {
+  const DeviceChangeStream = connection.collection('devices').watch();
+
+  DeviceChangeStream.on('change', (change) => {
     switch (change.operationType) {
       case 'insert':
-        const test = {
+        const device = {
           _id: change.fullDocument._id,
+          key: change.fullDocument.key,
           name: change.fullDocument.name,
           description: change.fullDocument.description,
+          data: change.fullDocument.data,
         };
-
-        io.of('/api/socket').emit('newTest', test);
+        console.log(device);
+        io.of('/api/socket').emit('newTest', device);
         break;
 
-      case 'delete':
-        io.of('/api/socket').emit('deletedTest', change.documentKey._id);
-        break;
+      // case 'delete':
+      //   io.of('/api/socket').emit('deletedTest', change.documentKey._id);
+      //   break;
     }
   });
 });

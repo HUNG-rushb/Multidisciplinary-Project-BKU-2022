@@ -5,51 +5,60 @@ import axios from 'axios';
 
 const TestDashboard = () => {
   const [test, setTest] = useState({
-    tests: [],
+    key: '',
     name: '',
     description: '',
+    data: [],
   });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const connectSocket = async () => {
     const socket = io(`${URLs.socketURL}/socket`);
 
-    socket.on('newTest', (data) => {
-      setTest({ tests: [...test.tests, data] });
-      console.log(test);
-    });
-
-    socket.on('deletedTest', (id) => {
-      const updatedTest = test.tests.filter((data) => {
-        return data._id !== id;
+    socket.on('newTest', (device) => {
+      setTest({
+        data: device.data,
+        key: device.key,
+        name: device.name,
+        description: device.description,
       });
-
-      setTest({ tests: updatedTest });
       console.log(test);
     });
 
-    socket.on('thoughtsCleared', () => {
-      setTest({ tests: [] });
-    });
+    //     socket.on('deletedTest', (id) => {
+    //       const updatedTest = test.data.filter((data) => {
+    //         return data._id !== id;
+    //       });
+    //
+    //       setTest({ data: updatedTest });
+    //       console.log(test);
+    //     });
+
+    // socket.on('thoughtsCleared', () => {
+    //   setTest({ data: [] });
+    // });
 
     await fetchThoughts();
   };
 
   const fetchThoughts = async () => {
     try {
-      const response = await axios.get(`${URLs.baseURL}/getTest`);
+      const response = await axios.get(`${URLs.baseURL}/getDevices`);
 
       if (response.data.success) {
-        // console.log(test);
-        // console.log(response.data.message);
-        // console.log(test.tests);
-        // console.log(response.data.message === test.tests);
-        if (
-          JSON.stringify(response.data.message) !== JSON.stringify(test.tests)
-        ) {
-          setTest({ tests: response.data.message });
+        // get first device
+        const device = response.data.message[0];
+        console.log(JSON.stringify(device) !== JSON.stringify(test));
+        if (JSON.stringify(device) !== JSON.stringify(test)) {
+          setTest({
+            key: device.key,
+            name: device.name,
+            description: device.description,
+            data: device.data,
+          });
           console.log(test);
         }
+        console.log(device);
       } else {
         alert(response.data.message);
       }
@@ -66,8 +75,8 @@ const TestDashboard = () => {
   }, [connectSocket]);
   return (
     <div>
-      {test.tests.map((each) => {
-        return <p>{each.name}</p>;
+      {test.data.map((each) => {
+        return <p>{each.value}</p>;
       })}
     </div>
   );

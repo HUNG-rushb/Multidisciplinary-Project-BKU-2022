@@ -1,3 +1,6 @@
+// ! THIS IS FOR TESTING PURPOSE
+// ! RENEMBER TO UNPLUG AFTER USE
+
 const Test = require('../models/Test');
 
 const addTest = async (req, res) => {
@@ -6,7 +9,7 @@ const addTest = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
     });
-
+    // await test.save();
     return res.json({
       success: true,
       message: 'Test successfully added.',
