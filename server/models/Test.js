@@ -1,3 +1,6 @@
+// ! THIS IS FOR TESTING PURPOSE
+// ! RENEMBER TO UNPLUG AFTER USE
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

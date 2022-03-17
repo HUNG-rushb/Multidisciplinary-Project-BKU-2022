@@ -1,3 +1,6 @@
+// ! THIS IS FOR TESTING PURPOSE
+// ! RENEMBER TO UNPLUG AFTER USE
+
 const Test = require('../models/Test');
 
 const addTest = async (req, res) => {

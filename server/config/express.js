@@ -12,8 +12,11 @@ const ExpressApp = () => {
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+
   //   app.use('/api/users', require('./routes/api/users'));
+  // ! THIS IS FOR TESTING PURPOSE
   app.use('/api', TestRoutes);
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../webclient/build')));
     app.get('*', function (req, res) {

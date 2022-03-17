@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const express = require('./config/express.js');
 const connectDB = require('./config/db');
-const getDataInterval = require('./fetchroutes/simplefetch.js');
+const fetchInterval = require('./fetchroutes/fetch');
 
 // Setting path
 const PORT = process.env.PORT || 5000;
@@ -29,7 +29,9 @@ connectDB();
 const connection = mongoose.connection;
 
 connection.once('open', () => {
-  getDataInterval;
+  // Fetch api from Adafruit at Interval of 5 seconds
+  fetchInterval;
+
   console.log('MongoDB database connected');
 
   console.log('Setting change streams');
