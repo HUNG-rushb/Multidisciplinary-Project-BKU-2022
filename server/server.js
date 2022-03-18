@@ -52,6 +52,11 @@ connection.once('open', () => {
         io.of('/api/socket').emit('newTest', device);
         break;
 
+      case 'update':
+        const updateFields = change.updateDescription.updatedFields;
+        const updateData = updateFields.data;
+        io.of('/api/socket').emit('updateTest', updateData);
+        break;
       // case 'delete':
       //   io.of('/api/socket').emit('deletedTest', change.documentKey._id);
       //   break;

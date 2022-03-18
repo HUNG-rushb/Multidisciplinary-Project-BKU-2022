@@ -11,12 +11,12 @@ const getData = require('./getData');
 // Fetch api from Adafruit at Interval of 5 seconds
 const fetchInterval = setInterval(() => {
   // getTest();
-  console.log('interval');
-  getDevices(5);
+  getDevices();
   getData(5);
 }, 5000);
 
 // const fetch = () => {
-//   getDevices(5);
+//   getDevices();
+//   getData(5);
 // };
 module.exports = fetchInterval;

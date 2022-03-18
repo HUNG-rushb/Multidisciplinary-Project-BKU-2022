@@ -2,7 +2,7 @@ const axios = require('axios');
 // const Test = require('../models/Test');
 const Device = require('../models/Device');
 
-const getDevices = async (limit) => {
+const getDevices = async () => {
   try {
     const resDevices = await axios.get(
       'https://io.adafruit.com/api/v2/andrewquang/feeds'
@@ -17,19 +17,6 @@ const getDevices = async (limit) => {
           name: name,
           description: description == null ? '' : description,
           username: username,
-        });
-
-        const resData = await axios.get(
-          `https://io.adafruit.com/api/v2/andrewquang/feeds/${key}/data?limit=${limit}`
-        );
-
-        resData.data.map((eachData) => {
-          const { id, value, created_at } = eachData;
-          const newData = { id, value, created_at };
-          console.log(!newDevice.data.includes(newData));
-          if (!newDevice.data.includes(newData)) {
-            newDevice.data.push(newData);
-          }
         });
         await newDevice.save();
       }

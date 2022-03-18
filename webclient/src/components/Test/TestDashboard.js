@@ -24,6 +24,14 @@ const TestDashboard = () => {
       });
       console.log(test);
     });
+    socket.on('updateTest', (updateData) => {
+      console.log(updateData);
+      setTest({
+        data: updateData,
+        ...test,
+      });
+      console.log(test);
+    });
 
     //     socket.on('deletedTest', (id) => {
     //       const updatedTest = test.data.filter((data) => {
@@ -48,7 +56,6 @@ const TestDashboard = () => {
       if (response.data.success) {
         // get first device
         const device = response.data.message[0];
-        console.log(JSON.stringify(device) !== JSON.stringify(test));
         if (JSON.stringify(device) !== JSON.stringify(test)) {
           setTest({
             key: device.key,
@@ -58,7 +65,6 @@ const TestDashboard = () => {
           });
           console.log(test);
         }
-        console.log(device);
       } else {
         alert(response.data.message);
       }
@@ -75,8 +81,8 @@ const TestDashboard = () => {
   }, [connectSocket]);
   return (
     <div>
-      {test.data.map((each) => {
-        return <p>{each.value}</p>;
+      {test.data.map((each, key) => {
+        return <p key={key}>{each.value}</p>;
       })}
     </div>
   );
