@@ -1,18 +1,18 @@
 import { Center, Box, Text, HStack, IconButton, Icon } from "native-base";
 import { Entypo } from "@native-base/icons";
 
-import MenuNavBar from "./MenuNavBar";
+// import SideBar from "./SideBar";
 
 const NavBar = (props) => {
   return (
     <>
-      {/* <Center>
+      <Center>
         <Box safeAreaTop bg="#ffffff" />
 
         <HStack
           bg={{
             linearGradient: {
-              colors: ["primary.100", "primary.700"],
+              colors: ["pink.200", "pink.500"],
               start: [0, 0],
               end: [1, 0],
             },
@@ -25,15 +25,12 @@ const NavBar = (props) => {
           maxW="100%"
         >
           <HStack alignItems="center">
-            <IconButton
-              icon={<Icon size="sm" as={Entypo} name="menu" color="black" />}
-              onPress={console.log(1)}
-            />
+            {/* <IconButton
+              icon={<Icon size="sm" as={Entypo} name="menu" color="pink.700" />}
+            /> */}
 
-            <MenuNavBar />
-
-            <Text color="white" fontSize="20" fontWeight="bold">
-              Home
+            <Text color="pink.500" fontSize="20" fontWeight="bold">
+              BKU Smart Home
             </Text>
           </HStack>
 
@@ -54,9 +51,9 @@ const NavBar = (props) => {
             />
           </HStack>
         </HStack>
-      </Center> */}
+      </Center>
 
-      <MenuNavBar />
+      {/* <SideBar /> */}
     </>
   );
 };
