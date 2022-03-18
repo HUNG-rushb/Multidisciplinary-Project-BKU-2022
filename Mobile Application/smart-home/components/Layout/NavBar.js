@@ -1,10 +1,12 @@
 import { Center, Box, Text, HStack, IconButton, Icon } from "native-base";
 import { Entypo } from "@native-base/icons";
 
+import MenuNavBar from "./MenuNavBar";
+
 const NavBar = (props) => {
   return (
     <>
-      <Center>
+      {/* <Center>
         <Box safeAreaTop bg="#ffffff" />
 
         <HStack
@@ -24,12 +26,15 @@ const NavBar = (props) => {
         >
           <HStack alignItems="center">
             <IconButton
-              icon={<Icon size="sm" as={Entypo} name="menu" color="white" />}
+              icon={<Icon size="sm" as={Entypo} name="menu" color="black" />}
+              onPress={console.log(1)}
             />
 
-            {/* <Text color="white" fontSize="20" fontWeight="bold">
+            <MenuNavBar />
+
+            <Text color="white" fontSize="20" fontWeight="bold">
               Home
-            </Text> */}
+            </Text>
           </HStack>
 
           <HStack>
@@ -49,7 +54,9 @@ const NavBar = (props) => {
             />
           </HStack>
         </HStack>
-      </Center>
+      </Center> */}
+
+      <MenuNavBar />
     </>
   );
 };

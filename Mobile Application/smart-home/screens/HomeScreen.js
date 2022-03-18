@@ -1,5 +1,7 @@
 // import { StyleSheet, StatusBar } from "react-native";
 import NavBar from "../components/Layout/NavBar";
+import Rooms from "../components/Layout/RoomsHS";
+import Devices from "../components/Layout/DevicesVS";
 
 const HomeScreen = (props) => {
   // const pressHandler = () => {
@@ -7,7 +9,13 @@ const HomeScreen = (props) => {
   // };
 
   // return <Button title="Test" style={styles.button} onPress={pressHandler} />;
-  return <NavBar />;
+  return (
+    <>
+      <NavBar />
+      <Rooms />
+      <Devices />
+    </>
+  );
 };
 
 // const styles = StyleSheet.create({
