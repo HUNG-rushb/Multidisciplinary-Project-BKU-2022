@@ -1,18 +1,20 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
-import HomeScreen from "../pages/HomeScreen";
-import SettingsScreen from "../pages/SettingsScreen";
+import HomeScreen from "../screens/HomeScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const SmartHomeNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
+    Home: {
+      screen: HomeScreen,
+    },
     Settings: {
       screen: SettingsScreen,
     },
   },
   {
-    defaultNavigationOptions: {},
+    defaultNavigationOptions: { headerShown: false },
   }
 );
 
