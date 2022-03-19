@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const express = require('./config/express.js');
 const connectDB = require('./config/db');
-const fetchInterval = require('./fetchroutes/fetch');
+const fetch = require('./fetchroutes/fetch');
 
 // Setting path
 const PORT = process.env.PORT || 5000;
@@ -30,7 +30,7 @@ const connection = mongoose.connection;
 
 connection.once('open', () => {
   // Fetch api from Adafruit at Interval of 5 seconds
-  fetchInterval;
+  fetch();
 
   console.log('MongoDB database connected');
 
@@ -48,7 +48,6 @@ connection.once('open', () => {
           description: change.fullDocument.description,
           data: change.fullDocument.data,
         };
-        console.log(device);
         io.of('/api/socket').emit('newTest', device);
         break;
 
