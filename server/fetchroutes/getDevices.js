@@ -24,16 +24,14 @@ const getDevices = async () => {
       const devices = await Device.find({ device_id: id });
 
       if (devices.length === 0 && !tempDevices.includes(id)) {
-        tempDevices.unshift(id);
-        const groups = eachDevice.groups.map(({ user_id, ...rest }) => rest);
         const newDevice = new Device({
           device_id: id,
           key: key,
           name: name,
           description: description == null ? '' : description,
           username: username,
-          group: groups,
         });
+        tempDevices.unshift(id);
         await newDevice.save();
       }
     });

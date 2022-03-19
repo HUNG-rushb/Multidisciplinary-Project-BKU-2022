@@ -2,19 +2,24 @@ const Device = require('../models/Device');
 
 const getDevices = async (req, res) => {
   try {
-    const devices = await Device.find().select('-_id -__v');
+    const devices = await Device.find();
 
-    return res.json({
-      success: true,
-      message: devices,
-    });
+    return res.json(devices);
   } catch (error) {
-    console.log('Error with fetching devices: ', error);
-    return res.json({
-      success: false,
-      message: 'Error with fetching devices. See server console for more info.',
-    });
+    console.error(error.message);
+    res.status(500).send('Server Error');
   }
 };
 
-module.exports = getDevices;
+const getDeviceById = async (req, res) => {
+  try {
+    const device = await Device.findOne({ device_id: req.params.device_id });
+
+    return res.json(device);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+module.exports = { getDevices, getDeviceById };

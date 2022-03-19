@@ -52,21 +52,21 @@ const TestDashboard = () => {
   const fetchThoughts = async () => {
     try {
       const response = await axios.get(`${URLs.baseURL}/getDevices`);
-
-      if (response.data.success) {
+      if (response.data) {
         // get first device
-        const device = response.data.message[0];
-        if (JSON.stringify(device) !== JSON.stringify(test)) {
-          setTest({
-            key: device.key,
-            name: device.name,
-            description: device.description,
-            data: device.data,
-          });
-          console.log(test);
-        }
+        const device = response.data;
+        console.log(device);
+        // if (JSON.stringify(device) !== JSON.stringify(test)) {
+        //   setTest({
+        //     key: device.key,
+        //     name: device.name,
+        //     description: device.description,
+        //     data: device.data,
+        //   });
+        //   console.log(test);
+        // }
       } else {
-        alert(response.data.message);
+        alert(response.data);
       }
     } catch (error) {
       console.log('Error with fetching thoughts: ', error);
@@ -81,9 +81,9 @@ const TestDashboard = () => {
   }, [connectSocket]);
   return (
     <div>
-      {test.data.map((each, key) => {
+      {/* {test.data.map((each, key) => {
         return <p key={key}>{each.value}</p>;
-      })}
+      })} */}
     </div>
   );
 };

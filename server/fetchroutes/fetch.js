@@ -5,7 +5,7 @@ const setIOkey = require('../ultis/setIOKey');
 const getRooms = require('./getRooms');
 const getTypes = require('./getTypes');
 const getDevices = require('./getDevices');
-const getData = require('./getData');
+const addDevices = require('./addDevices');
 
 // ! if the Adafruit is set to public we dont need to setIOkey
 setIOkey(io_key);
@@ -17,10 +17,14 @@ setIOkey(io_key);
 //   getData(5);
 // }, 5000);
 
-const fetch = () => {
+const fetch = async () => {
   // getData(1);
-  getDevices();
-  // getRooms();
-  // getTypes();
+  var startTime = performance.now();
+  await getDevices();
+  await getRooms();
+  await getTypes();
+  await addDevices();
+  var endTime = performance.now();
+  console.log(`${endTime - startTime} milliseconds`);
 };
 module.exports = fetch;

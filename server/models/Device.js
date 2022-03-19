@@ -27,19 +27,19 @@ const DeviceSchema = new Schema({
       },
     },
   ],
-  group: [
-    {
-      id: {
-        type: String,
-      },
-      key: {
-        type: String,
-      },
-      name: {
-        type: String,
-      },
-    },
-  ],
+  // group: [
+  //   {
+  //     id: {
+  //       type: String,
+  //     },
+  //     key: {
+  //       type: String,
+  //     },
+  //     name: {
+  //       type: String,
+  //     },
+  //   },
+  // ],
 });
 
 module.exports = Device = mongoose.model('devices', DeviceSchema);
