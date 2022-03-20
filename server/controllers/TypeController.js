@@ -21,4 +21,17 @@ const getTypeById = async (req, res) => {
   }
 };
 
-module.exports = { getTypes, getTypeById };
+const getDevicesByTypeId = async (req, res) => {
+  try {
+    const type = await Type.findOne({ type_id: req.params.type_id }).populate(
+      'devices',
+      ['device_id', 'key', 'name', 'description']
+    );
+
+    return res.json(type.devices);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+module.exports = { getTypes, getTypeById, getDevicesByTypeId };

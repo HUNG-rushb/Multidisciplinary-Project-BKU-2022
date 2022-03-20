@@ -1,8 +1,13 @@
-const { getTypes, getTypeById } = require('../controllers/TypeController');
+const {
+  getTypes,
+  getTypeById,
+  getDevicesByTypeId,
+} = require('../controllers/TypeController');
 const express = require('express');
 const router = express.Router();
 
-router.get('/getTypes', getTypes);
-router.get('/getType/:type_id', getTypeById);
+router.get('/types', getTypes);
+router.get('/type/:type_id', getTypeById);
+router.get('/type/:type_id/devices', getDevicesByTypeId);
 
 module.exports = router;

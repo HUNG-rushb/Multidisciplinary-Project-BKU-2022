@@ -5,7 +5,7 @@ const {
 const express = require('express');
 const router = express.Router();
 
-router.get('/getDevices', getDevices);
-router.get('/getDevice/:device_id', getDeviceById);
+router.get('/devices', getDevices);
+router.get('/device/:device_id', getDeviceById);
 
 module.exports = router;
