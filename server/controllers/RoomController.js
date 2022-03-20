@@ -1,3 +1,4 @@
+const axios = require('axios');
 const Room = require('../models/Room');
 const { check, validationResult } = require('express-validator');
 
@@ -38,22 +39,89 @@ const getDevicesByRoomId = async (req, res) => {
 };
 
 const addRoom = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  const { name, description } = req.body;
+  const { group_name, description } = req.body;
   try {
-    const room = await Room.findOne({ room_id: req.params.room_id }).populate(
-      'devices',
-      ['device_id', 'key', 'name', 'description']
-    );
+    const room = await Room.findOne({ name: group_name });
+    if (room) {
+      return res.status(400).json({ msg: 'Name has already been taken' });
+    } else {
+      const RoomFields = {
+        name: group_name,
+        description: description,
+      };
 
-    return res.json(room.devices);
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      await axios
+        .post(
+          'https://io.adafruit.com/api/v2/andrewquang/groups',
+          RoomFields,
+          config
+        )
+        .then(async (success) => {
+          const newRoom = new Room(RoomFields);
+          await newRoom.save();
+          return res.json(newRoom);
+          // return res.status(200).send(success);
+        })
+        .catch((err) => {
+          return res.status(400).json({ msg: err.response.data.error });
+        });
+    }
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
   }
 };
 
-module.exports = { getRooms, getRoomById, getDevicesByRoomId, addRoom };
+const updateRoom = async (req, res) => {
+  const { group_name, description } = req.body;
+  try {
+    let room = await Room.findOne({ room_id: req.params.room_id });
+    if (room) {
+      const RoomFields = {
+        name: group_name,
+        description: description,
+      };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      await axios
+        .put(
+          `https://io.adafruit.com/api/v2/andrewquang/groups/${room.key}`,
+          RoomFields,
+          config
+        )
+        .then(async (success) => {
+          room = await Room.findOneAndUpdate(
+            { room_id: req.params.room_id },
+            { $set: RoomFields },
+            { new: true }
+          );
+          return res.json(room);
+          // return res.status(200).send(success);
+        })
+        .catch((err) => {
+          return res.status(400).json({ msg: err.response.data.error });
+        });
+    } else {
+      return res.status(400).json({ msg: 'This room is not existed' });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+module.exports = {
+  getRooms,
+  getRoomById,
+  getDevicesByRoomId,
+  addRoom,
+  updateRoom,
+};

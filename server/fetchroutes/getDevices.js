@@ -1,6 +1,7 @@
 const axios = require('axios');
 // const Test = require('../models/Test');
 const Device = require('../models/Device');
+const Type = require('../models/Type');
 
 const addDeviceToRoom = (RoomId, Device) => {
   return Room.findByIdAndUpdate(RoomId, { $push: { devices: Device._id } });
@@ -18,9 +19,20 @@ const getDevices = async () => {
     const responseDevices = response.data;
 
     let tempDevices = [];
+    let tempTypes = [];
 
     responseDevices.map(async (eachDevice) => {
       const { id, key, name, description, username } = eachDevice;
+      const types = await Type.find({ name: description });
+
+      if (types.length === 0 && !tempTypes.includes(description)) {
+        const newType = new Type({
+          name: description,
+        });
+        tempTypes.unshift(description);
+        await newType.save();
+      }
+
       const devices = await Device.find({ device_id: id });
 
       if (devices.length === 0 && !tempDevices.includes(id)) {

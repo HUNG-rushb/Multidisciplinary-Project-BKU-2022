@@ -10,7 +10,7 @@ const getRooms = async () => {
     const responseRooms = response.data;
 
     responseRooms.map(async (eachRoom) => {
-      if (eachRoom.name.includes('Room')) {
+      if (!eachRoom.name.includes('Default')) {
         // console.log(eachRoom);
         const { key, id, name, description } = eachRoom;
         const rooms = await Room.find({ key: key });

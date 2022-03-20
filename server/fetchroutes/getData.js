@@ -3,7 +3,7 @@ const e = require('cors');
 // const Test = require('../models/Test');
 const Device = require('../models/Device');
 
-const getData = async (limit) => {
+const getData = async (limit = 5) => {
   try {
     const devices = await Device.find();
     devices.map(async (device) => {

@@ -26,7 +26,7 @@ const addDevices = async () => {
         const devicesinType = await Type.find({ devices: device._id });
         if (devicesinType.length == 0) {
           await Type.findOneAndUpdate(
-            { type_id: eachRoomType.id },
+            { name: feed.description },
             { $push: { devices: device._id } }
           );
         }
