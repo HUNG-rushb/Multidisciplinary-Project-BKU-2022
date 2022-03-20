@@ -16,7 +16,9 @@ const getRooms = async (req, res) => {
 const getRoomById = async (req, res) => {
   try {
     const room = await Room.findOne({ room_id: req.params.room_id });
-
+    if (!room) {
+      return res.status(400).json({ errors: [{ msg: 'Room not found' }] });
+    }
     return res.json(room);
   } catch (error) {
     console.error(error.message);
@@ -39,11 +41,17 @@ const getDevicesByRoomId = async (req, res) => {
 };
 
 const addRoom = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { group_name, description } = req.body;
   try {
     const room = await Room.findOne({ name: group_name });
     if (room) {
-      return res.status(400).json({ msg: 'Name has already been taken' });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Name has already been taken' }] });
     } else {
       const RoomFields = {
         name: group_name,
@@ -62,13 +70,13 @@ const addRoom = async (req, res) => {
           config
         )
         .then(async (success) => {
-          const newRoom = new Room(RoomFields);
-          await newRoom.save();
-          return res.json(newRoom);
+          return res.json({ msg: ' New room has been added successfully' });
           // return res.status(200).send(success);
         })
         .catch((err) => {
-          return res.status(400).json({ msg: err.response.data.error });
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
         });
     }
   } catch (error) {
@@ -78,6 +86,10 @@ const addRoom = async (req, res) => {
 };
 
 const updateRoom = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { group_name, description } = req.body;
   try {
     let room = await Room.findOne({ room_id: req.params.room_id });
@@ -107,10 +119,14 @@ const updateRoom = async (req, res) => {
           // return res.status(200).send(success);
         })
         .catch((err) => {
-          return res.status(400).json({ msg: err.response.data.error });
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
         });
     } else {
-      return res.status(400).json({ msg: 'This room is not existed' });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'This room is not existed' }] });
     }
   } catch (error) {
     console.error(error.message);

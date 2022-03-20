@@ -1,5 +1,5 @@
 const express = require('express');
-const { check, validationResult } = require('express-validator');
+const { check } = require('express-validator');
 const {
   getRooms,
   getRoomById,
@@ -21,12 +21,11 @@ router.put('/room/:room_id', updateRoom);
 
 module.exports = router;
 
-// add Type
 // add Data
 // put Room // xong
 //  add Type? khong lam
 //  put Type? khong lam
-// add Device
+// add Device // xong
 //  put Device
 //  delete Room
 // delete Device
