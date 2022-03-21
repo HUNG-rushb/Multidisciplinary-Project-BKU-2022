@@ -6,6 +6,7 @@ const {
   getDevicesByRoomId,
   addRoom,
   updateRoom,
+  deleteRoom,
 } = require('../controllers/RoomController');
 const router = express.Router();
 
@@ -18,18 +19,6 @@ router.post(
   addRoom
 );
 router.put('/room/:room_id', updateRoom);
+router.delete('/room/:room_id', deleteRoom);
 
 module.exports = router;
-
-// add Data
-// put Room // xong
-//  add Type? khong lam
-//  put Type? khong lam
-// add Device // xong
-//  put Device
-//  delete Room
-// delete Device
-// delete Data ? khong lam
-// return {
-//  "data": ["32","23",""]
-// }

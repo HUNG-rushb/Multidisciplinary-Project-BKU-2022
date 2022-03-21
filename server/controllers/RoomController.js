@@ -134,10 +134,37 @@ const updateRoom = async (req, res) => {
   }
 };
 
+const deleteRoom = async (req, res) => {
+  try {
+    let room = await Room.findOne({ room_id: req.params.room_id });
+    if (room) {
+      await axios
+        .delete(`https://io.adafruit.com/api/v2/andrewquang/groups/${room.key}`)
+        .then(async (success) => {
+          await Room.findOneAndRemove({ room_id: req.params.room_id });
+          return res.json({ msg: 'Room has been deleted' });
+        })
+        .catch((err) => {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
+        });
+    } else {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'This room is not existed' }] });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+
 module.exports = {
   getRooms,
   getRoomById,
   getDevicesByRoomId,
   addRoom,
   updateRoom,
+  deleteRoom,
 };

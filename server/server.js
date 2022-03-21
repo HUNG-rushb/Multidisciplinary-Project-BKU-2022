@@ -3,7 +3,7 @@ const { Server } = require('socket.io');
 const mongoose = require('mongoose');
 
 const express = require('./config/express.js');
-const fetch = require('./fetchroutes/fetch');
+const fetchInterval = require('./fetchroutes/fetch');
 const connectDB = require('./config/db');
 
 // Setting path
@@ -31,7 +31,7 @@ const connection = mongoose.connection;
 
 connection.once('open', () => {
   // Fetch api from Adafruit at Interval of 5 seconds
-  fetch();
+  fetchInterval;
 
   console.log('MongoDB database connected');
 

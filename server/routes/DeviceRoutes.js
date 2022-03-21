@@ -4,12 +4,21 @@ const {
   getDeviceById,
   addDevice,
   updateDevice,
+  deleteDevice,
+  getDeviceData,
+  addDatatoDevice,
 } = require('../controllers/DeviceController');
 const express = require('express');
 const router = express.Router();
 
 router.get('/devices', getDevices);
 router.get('/device/:device_id', getDeviceById);
+router.get('/device/:device_id/data', getDeviceData);
+router.post(
+  '/device/:device_id/data',
+  [check('value', 'Value is required').not().isEmpty()],
+  addDatatoDevice
+);
 router.post(
   '/device',
   [
@@ -20,4 +29,6 @@ router.post(
   addDevice
 );
 router.put('/device/:device_id', updateDevice);
+router.delete('/device/:device_id', deleteDevice);
+
 module.exports = router;

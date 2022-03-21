@@ -1,6 +1,7 @@
 const axios = require('axios');
 const Device = require('../models/Device');
 const Room = require('../models/Room');
+const Type = require('../models/Type');
 const { check, validationResult } = require('express-validator');
 
 const getDevices = async (req, res) => {
@@ -59,7 +60,6 @@ const addDevice = async (req, res) => {
         )
         .then(async (success) => {
           return res.json({ msg: ' New device has been added successfully' });
-          // return res.status(200).send(success);
         })
         .catch((err) => {
           return res
@@ -73,15 +73,17 @@ const addDevice = async (req, res) => {
   }
 };
 
-// ! Uncompleted
 const updateDevice = async (req, res) => {
-  const { group_name, description } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { device_name } = req.body;
   try {
-    let room = await Room.findOne({ room_id: req.params.room_id });
-    if (room) {
-      const RoomFields = {
-        name: group_name,
-        description: description,
+    let device = await Device.findOne({ device_id: req.params.device_id });
+    if (device) {
+      const DeviceFields = {
+        name: device_name,
       };
       const config = {
         headers: {
@@ -90,29 +92,134 @@ const updateDevice = async (req, res) => {
       };
       await axios
         .put(
-          `https://io.adafruit.com/api/v2/andrewquang/groups/${room.key}`,
-          RoomFields,
+          `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}`,
+          DeviceFields,
           config
         )
         .then(async (success) => {
-          room = await Room.findOneAndUpdate(
-            { room_id: req.params.room_id },
-            { $set: RoomFields },
+          device = await Device.findOneAndUpdate(
+            { device_id: req.params.device_id },
+            { $set: DeviceFields },
             { new: true }
           );
-          return res.json(room);
-          // return res.status(200).send(success);
+          return res.json(device);
         })
         .catch((err) => {
-          return res.status(400).json({ msg: err.response.data.error });
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
         });
     } else {
-      return res.status(400).json({ msg: 'This room is not existed' });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'This device is not existed' }] });
     }
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
   }
 };
-// getData
-module.exports = { getDevices, getDeviceById, addDevice, updateDevice };
+
+const deleteDevice = async (req, res) => {
+  try {
+    let device = await Device.findOne({ device_id: req.params.device_id });
+    if (device) {
+      await axios
+        .delete(
+          `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}`
+        )
+        .then(async (success) => {
+          let room = await Room.findOne({
+            key: device.key.split('.')[0],
+          });
+          let indexinRoom = room.devices.indexOf(device._id);
+          room.devices = room.devices.splice(indexinRoom, 1);
+          let type = await Type.findOne({ name: device.description });
+          let indexinType = type.devices.indexOf(device._id);
+          type.devices = type.devices.splice(indexinType, 1);
+          await room.save();
+          await type.save();
+          await Device.findOneAndRemove({ device_id: req.params.device_id });
+          return res.json({ msg: 'Device has been deleted' });
+        })
+        .catch((err) => {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
+        });
+    } else {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'This device is not existed' }] });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+const getDeviceData = async (req, res) => {
+  try {
+    const device = await Device.findOne({ device_id: req.params.device_id });
+    if (!device) {
+      return res.status(400).json({ errors: [{ msg: 'Device not found' }] });
+    }
+    // console.log(device.data);
+    const newDataArray = device.data.map(({ value, ...rest }) => value);
+    return res.json(newDataArray);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+const addDatatoDevice = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { value } = req.body;
+  try {
+    let device = await Device.findOne({ device_id: req.params.device_id });
+    if (device) {
+      const ValueField = {
+        value: value,
+      };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      await axios
+        .post(
+          `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}/data`,
+          ValueField,
+          config
+        )
+        .then(async (success) => {
+          return res.json({ msg: 'New Data has been added' });
+        })
+        .catch((err) => {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
+        });
+    } else {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'This device is not existed' }] });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
+module.exports = {
+  getDevices,
+  getDeviceById,
+  addDevice,
+  updateDevice,
+  deleteDevice,
+  getDeviceData,
+  addDatatoDevice,
+};

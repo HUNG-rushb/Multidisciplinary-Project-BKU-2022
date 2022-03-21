@@ -3,13 +3,6 @@ const axios = require('axios');
 const Device = require('../models/Device');
 const Type = require('../models/Type');
 
-const addDeviceToRoom = (RoomId, Device) => {
-  return Room.findByIdAndUpdate(RoomId, { $push: { devices: Device._id } });
-};
-const addDeviceToType = (TypeId, Device) => {
-  return Type.findByIdAndUpdate(TypeId, { $push: { devices: Device._id } });
-};
-
 const getDevices = async () => {
   try {
     const response = await axios.get(

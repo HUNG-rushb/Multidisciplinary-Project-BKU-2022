@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import URLs from '../../URLs';
 import io from 'socket.io-client';
 import axios from 'axios';
@@ -11,6 +11,7 @@ const TestDashboard = () => {
     data: [],
   });
 
+  const currentRef = useRef([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const connectSocket = async () => {
     const socket = io(`${URLs.socketURL}/socket`);
@@ -51,11 +52,12 @@ const TestDashboard = () => {
 
   const fetchThoughts = async () => {
     try {
-      const response = await axios.get(`${URLs.baseURL}/getDevices`);
+      const response = await axios.get(`${URLs.baseURL}/devices`);
       if (response.data) {
         // get first device
-        const device = response.data;
-        console.log(device);
+        currentRef.current = response.data;
+        console.log(currentRef.current);
+        console.log(currentRef);
         // if (JSON.stringify(device) !== JSON.stringify(test)) {
         //   setTest({
         //     key: device.key,

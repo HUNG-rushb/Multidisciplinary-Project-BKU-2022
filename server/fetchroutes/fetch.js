@@ -11,18 +11,7 @@ const getData = require('./getData');
 setIOkey(io_key);
 
 // Fetch api from Adafruit at Interval of 5 seconds
-// const fetchInterval = setInterval(async () => {
-//   // getTest();
-//   var startTime = performance.now();
-// await getDevices();
-// await getRooms();
-// await addDevices();
-// await getData();
-//   var endTime = performance.now();
-//   console.log(`${endTime - startTime} milliseconds`);
-// }, 5000);
-
-const fetch = async () => {
+const fetchInterval = setInterval(async () => {
   var startTime = performance.now();
   await getDevices();
   await getRooms();
@@ -30,5 +19,15 @@ const fetch = async () => {
   await getData();
   var endTime = performance.now();
   console.log(`${endTime - startTime} milliseconds`);
+}, 5000);
+
+const fetch = async () => {
+  // var startTime = performance.now();
+  // await getDevices();
+  // await getRooms();
+  // await addDevices();
+  // await getData();
+  // var endTime = performance.now();
+  // console.log(`${endTime - startTime} milliseconds`);
 };
-module.exports = fetch;
+module.exports = fetchInterval;
