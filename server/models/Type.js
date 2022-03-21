@@ -2,18 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TypeSchema = new Schema({
-  device: [
+  name: {
+    type: String,
+  },
+  // Array of devices
+  devices: [
     {
       type: Schema.Types.ObjectId,
       ref: 'devices',
     },
   ],
-  name: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
 });
 
 module.exports = Type = mongoose.model('type', TypeSchema);

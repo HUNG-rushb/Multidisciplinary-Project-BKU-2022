@@ -3,8 +3,8 @@ const { Server } = require('socket.io');
 const mongoose = require('mongoose');
 
 const express = require('./config/express.js');
-const connectDB = require('./config/db');
 const fetchInterval = require('./fetchroutes/fetch');
+const connectDB = require('./config/db');
 
 // Setting path
 const PORT = process.env.PORT || 5000;
@@ -26,6 +26,7 @@ httpServer.listen(PORT, () =>
 );
 
 connectDB();
+
 const connection = mongoose.connection;
 
 connection.once('open', () => {
@@ -48,7 +49,6 @@ connection.once('open', () => {
           description: change.fullDocument.description,
           data: change.fullDocument.data,
         };
-        console.log(device);
         io.of('/api/socket').emit('newTest', device);
         break;
 

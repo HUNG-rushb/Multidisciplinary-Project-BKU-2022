@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DeviceSchema = new Schema({
-  room: {
-    type: Schema.Types.ObjectId,
-    ref: 'rooms',
+  device_id: {
+    type: String,
   },
   key: {
     type: String,
@@ -13,9 +12,6 @@ const DeviceSchema = new Schema({
     type: String,
   },
   description: {
-    type: String,
-  },
-  username: {
     type: String,
   },
   data: [
@@ -31,6 +27,19 @@ const DeviceSchema = new Schema({
       },
     },
   ],
+  // group: [
+  //   {
+  //     id: {
+  //       type: String,
+  //     },
+  //     key: {
+  //       type: String,
+  //     },
+  //     name: {
+  //       type: String,
+  //     },
+  //   },
+  // ],
 });
 
 module.exports = Device = mongoose.model('devices', DeviceSchema);
