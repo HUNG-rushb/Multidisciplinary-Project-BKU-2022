@@ -2,7 +2,7 @@ let URLs = {};
 
 if (process.env.NODE_ENV === 'production') {
   URLs = {
-    baseURL: '/api',
+    baseURL: 'https://bku-ces-iotsmarthouse.herokuapp.com/api',
     socketURL: 'https://bku-ces-iotsmarthouse.herokuapp.com/api',
   };
 } else {
