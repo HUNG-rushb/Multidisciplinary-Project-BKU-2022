@@ -10,13 +10,13 @@ const HomeScreen = (props) => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
-      <Divider my="3" bg="pink.200" thickness="2" />
+      {/* <Divider my="3" bg="pink.200" thickness="2" /> */}
 
       <Rooms navigation={props.navigation} />
 
-      <Divider my="3" bg="pink.200" thickness="2" />
+      {/* <Divider my="3" bg="pink.200" thickness="2" /> */}
 
       {/* <Devices /> */}
     </>
