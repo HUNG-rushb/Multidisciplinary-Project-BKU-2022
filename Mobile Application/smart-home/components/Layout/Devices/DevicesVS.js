@@ -51,16 +51,6 @@ const Devices = () => {
               <DeviceCard />
               <DeviceCard />
               <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
-              <DeviceCard />
             </VStack>
           </HStack>
         </ScrollView>

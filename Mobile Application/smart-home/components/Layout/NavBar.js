@@ -7,8 +7,6 @@ const NavBar = (props) => {
   return (
     <>
       <Center>
-        <Box safeAreaTop bg="#ffffff" />
-
         <HStack
           bg={{
             linearGradient: {
@@ -25,10 +23,6 @@ const NavBar = (props) => {
           maxW="100%"
         >
           <HStack alignItems="center">
-            {/* <IconButton
-              icon={<Icon size="sm" as={Entypo} name="menu" color="pink.700" />}
-            /> */}
-
             <Text color="pink.500" fontSize="20" fontWeight="bold">
               BKU Smart Home
             </Text>
