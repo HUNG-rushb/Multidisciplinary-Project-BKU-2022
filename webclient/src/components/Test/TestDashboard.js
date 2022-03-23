@@ -1,20 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import URLs from '../../URLs';
 import io from 'socket.io-client';
 import axios from 'axios';
-
-const TestDashboard = () => {
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loadDevices } from '../../actions/device';
+import { loadRooms } from '../../actions/room';
+import { loadTypes } from '../../actions/type';
+const TestDashboard = ({
+  device: { devices },
+  room: { rooms },
+  type_device: { types },
+}) => {
   const currentRef = useRef([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const connectSocket = async () => {
     const socket = io(`${URLs.socketURL}/socket`);
 
-    socket.on('newTest', (device) => {
-      currentRef.device = device;
+    socket.on('newDevice', (device) => {
+      currentRef.currentRef = device;
       console.log(currentRef);
     });
-    socket.on('updateTest', (updateData) => {
-      currentRef.updateData = updateData;
+    socket.on('updateDevice', (updateData) => {
+      console.log(updateData);
+      // currentRef.currentRef = updateData;
       console.log(currentRef);
     });
 
@@ -39,8 +48,8 @@ const TestDashboard = () => {
       const response = await axios.get(`${URLs.baseURL}/devices`);
       if (response.data) {
         // get first device
-        currentRef.current = response.data;
-        console.log(currentRef);
+        // currentRef.current = response.data;
+        // console.log(currentRef.current[0].data);
         // if (JSON.stringify(device) !== JSON.stringify(test)) {
         //   setTest({
         //     key: device.key,
@@ -62,15 +71,39 @@ const TestDashboard = () => {
   };
 
   useEffect(() => {
-    connectSocket();
-  }, [connectSocket]);
+    // connectSocket();
+    loadDevices();
+    loadRooms();
+    loadTypes();
+  }, []);
   return (
     <div>
-      {/* {test.data.map((each, key) => {
-        return <p key={key}>{each.value}</p>;
+      {/* {currentRef.current[0].data.map((each, index) => {
+        return <p key={index}>{each.value}</p>;
       })} */}
+      {devices.map((each) => {
+        return <p>{each.name}</p>;
+      })}
+      {rooms.map((each) => {
+        return <p>{each.name}</p>;
+      })}
+      {types.map((each) => {
+        return <p>{each.name}</p>;
+      })}
     </div>
   );
 };
 
-export default TestDashboard;
+TestDashboard.propTypes = {
+  device: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired,
+  type_device: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  device: state.device,
+  room: state.room,
+  type_device: state.type_device,
+});
+
+export default connect(mapStateToProps, {})(TestDashboard);
