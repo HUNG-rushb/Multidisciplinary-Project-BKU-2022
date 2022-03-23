@@ -1,5 +1,5 @@
 // import { ImageBackground, View, StatusBar } from "react-native";
-import { Divider, Button } from "native-base";
+import { Divider, Text } from "native-base";
 
 import NavBar from "../components/Layout/NavBar";
 import Rooms from "../components/Layout/Rooms/RoomsHS";
