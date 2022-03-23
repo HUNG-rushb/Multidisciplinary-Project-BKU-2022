@@ -49,7 +49,7 @@ const Rooms = (props) => {
               route={itemData.route}
               navigation={props.navigation}
               key={index}
-            ></RoomCard>
+            />
           ))}
         </HStack>
       </ScrollView>
