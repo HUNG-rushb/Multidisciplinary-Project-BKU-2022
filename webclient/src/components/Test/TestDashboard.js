@@ -4,34 +4,18 @@ import io from 'socket.io-client';
 import axios from 'axios';
 
 const TestDashboard = () => {
-  const [test, setTest] = useState({
-    key: '',
-    name: '',
-    description: '',
-    data: [],
-  });
-
   const currentRef = useRef([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const connectSocket = async () => {
     const socket = io(`${URLs.socketURL}/socket`);
 
     socket.on('newTest', (device) => {
-      setTest({
-        data: device.data,
-        key: device.key,
-        name: device.name,
-        description: device.description,
-      });
-      console.log(test);
+      currentRef.device = device;
+      console.log(currentRef);
     });
     socket.on('updateTest', (updateData) => {
-      console.log(updateData);
-      setTest({
-        data: updateData,
-        ...test,
-      });
-      console.log(test);
+      currentRef.updateData = updateData;
+      console.log(currentRef);
     });
 
     //     socket.on('deletedTest', (id) => {
@@ -56,7 +40,6 @@ const TestDashboard = () => {
       if (response.data) {
         // get first device
         currentRef.current = response.data;
-        console.log(currentRef.current);
         console.log(currentRef);
         // if (JSON.stringify(device) !== JSON.stringify(test)) {
         //   setTest({
