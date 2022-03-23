@@ -19,6 +19,14 @@ const getRooms = async () => {
             key: key,
             room_id: id,
             name: name,
+            image:
+              name == 'Livingroom'
+                ? 'https://i.ibb.co/YZ0pKzj/livingroom.jpg'
+                : name == 'Kitchen'
+                ? 'https://i.ibb.co/hfKKFqZ/kitchen.jpg'
+                : name == 'Bedroom'
+                ? 'https://i.ibb.co/wrHDt4W/bedroom.jpg'
+                : 'https://i.ibb.co/Df9cpLf/bathroom.jpg',
             description: description == null ? '' : description,
           });
           await newRoom.save();
