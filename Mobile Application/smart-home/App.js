@@ -1,19 +1,12 @@
-// import { useState } from "react";
-// import { AppLoading } from "expo";
-
-// import * as Font from "expo-font";
-
 import SmartHomeNavigator from "./navigation/SmartHomeNavigator";
 import { NativeBaseProvider, extendTheme } from "native-base";
 
-// import { Entypo } from "@native-base/icons";
+// import { createStore, combineReducers } from "redux";
+// import { Provider } from "react-redux";
 
-// Load fonts
-// const fetchFonts = () => {
-//   return Font.loadAsync({
-//     // "open-sans": require("./assets/fonts/a/ttf"),
-//   });
-// };
+// const rootReducer = combineReducers();
+
+// const store = createStore(rootReducer);
 
 // ! https://docs.nativebase.io/setup-provider
 const nativebaseConfig = {
@@ -46,20 +39,13 @@ const theme = extendTheme({
 });
 
 export default function App() {
-  // const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  // if (!fontsLoaded) {
-  //   return (
-  //     <AppLoading
-  //       startAsync={fetchFonts}
-  //       onFinish={() => setFontsLoaded(true)}
-  //     />
-  //   );
-  // }
-
   return (
+    // <Provider store={store}>
     <NativeBaseProvider config={nativebaseConfig} theme={theme}>
       <SmartHomeNavigator />
     </NativeBaseProvider>
+    // </Provider>
   );
 }
+
+// https://bku-ces-iotsmarthouse.herokuapp.com/
