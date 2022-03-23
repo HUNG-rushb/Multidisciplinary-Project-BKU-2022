@@ -1,5 +1,5 @@
-import { View, Text, VStack, HStack, Switch, Box, Icon } from "native-base";
-import { Entypo, MaterialCommunityIcons } from "@native-base/icons";
+import { Text, VStack, HStack, Switch, Box, Icon } from "native-base";
+import { MaterialCommunityIcons } from "@native-base/icons";
 
 const SwitchCard = (props) => {
   let icon;

@@ -3,7 +3,7 @@ import { NativeBaseProvider, extendTheme } from "native-base";
 
 // import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import store from "./store/reducers/store";
+import store from "./store/store";
 
 // const rootReducer = combineReducers();
 

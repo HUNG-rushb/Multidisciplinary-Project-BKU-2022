@@ -14,11 +14,11 @@ const HomeScreen = (props) => {
 
       {/* <Divider my="3" bg="pink.200" thickness="2" /> */}
 
-      <Rooms navigation={props.navigation} />
+      {/* <Rooms navigation={props.navigation} /> */}
 
       {/* <Divider my="3" bg="pink.200" thickness="2" /> */}
 
-      {/* <Devices /> */}
+      <Devices />
     </>
   );
 };

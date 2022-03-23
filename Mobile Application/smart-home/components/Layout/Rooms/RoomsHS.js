@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-
 import { Heading, HStack, ScrollView, Box, Spinner } from "native-base";
-
 import RoomCard from "./RoomCard";
 import axios from "axios";
 
