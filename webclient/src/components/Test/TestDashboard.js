@@ -1,9 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import URLs from '../../URLs';
 import io from 'socket.io-client';
 import axios from 'axios';
-
-const TestDashboard = () => {
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loadDevices } from '../../actions/device';
+import { loadRooms } from '../../actions/room';
+import { loadTypes } from '../../actions/type';
+const TestDashboard = ({
+  device: { devices },
+  room: { rooms },
+  type_device: { types },
+}) => {
   const currentRef = useRef([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const connectSocket = async () => {
@@ -32,4 +40,16 @@ const TestDashboard = () => {
   return <div>{currentRef}</div>;
 };
 
-export default TestDashboard;
+TestDashboard.propTypes = {
+  device: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired,
+  type_device: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  device: state.device,
+  room: state.room,
+  type_device: state.type_device,
+});
+
+export default connect(mapStateToProps, {})(TestDashboard);
