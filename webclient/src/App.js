@@ -1,5 +1,5 @@
 // import NavBar from './components/NavBar/NavBar';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -7,6 +7,8 @@ import { loadDevices } from './actions/device';
 import { loadRooms } from './actions/room';
 import { loadTypes } from './actions/type';
 import TestDashboard from './components/Test/TestDashboard';
+import Home from './components/Home/Home';
+import './App.css';
 
 const App = () => {
   useEffect(() => {
@@ -17,9 +19,10 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <div className='App'>
-        <TestDashboard />
-      </div>
+      <Fragment>
+        {/* <TestDashboard /> */}
+        <Home />
+      </Fragment>
     </Provider>
   );
 };

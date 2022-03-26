@@ -13,22 +13,24 @@ const getData = async () => {
 
       const responseData = response.data.slice(0, 10);
 
-      responseData.map((eachData) => {
-        const { id, value, created_at } = eachData;
-        const newData = { data_id: id, value, created_at };
-        if (device.data.length == 10) {
-          device.data.pop();
-        }
+      if (responseData.length === 0) {
+        responseData.map((eachData) => {
+          const { id, value, created_at } = eachData;
+          const newData = { data_id: id, value, created_at };
+          if (device.data.length == 10) {
+            device.data.pop();
+          }
 
-        if (device.data.length == 0) {
-          device.data.unshift(newData);
-        }
+          if (device.data.length == 0) {
+            device.data.unshift(newData);
+          }
 
-        if (device.data.filter((e) => e.data_id == id).length == 0) {
-          device.data.unshift(newData);
-        }
-      });
-      await device.save();
+          if (device.data.filter((e) => e.data_id == id).length == 0) {
+            device.data.unshift(newData);
+          }
+        });
+        await device.save();
+      }
     });
   } catch (error) {
     console.error(error.message);

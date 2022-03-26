@@ -11,27 +11,29 @@ const addDevices = async () => {
 
     const responseRoomsTypes = response.data;
 
-    responseRoomsTypes.map(async (eachRoomType) => {
-      eachRoomType.feeds.map(async (feed) => {
-        const device = await Device.findOne({ device_id: feed.id });
+    if (responseRoomsTypes.length === 0) {
+      responseRoomsTypes.map(async (eachRoomType) => {
+        eachRoomType.feeds.map(async (feed) => {
+          const device = await Device.findOne({ device_id: feed.id });
 
-        const devicesinRoom = await Room.find({ devices: device._id });
-        if (devicesinRoom.length == 0) {
-          await Room.findOneAndUpdate(
-            { room_id: eachRoomType.id },
-            { $push: { devices: device._id } }
-          );
-        }
+          const devicesinRoom = await Room.find({ devices: device._id });
+          if (devicesinRoom.length == 0) {
+            await Room.findOneAndUpdate(
+              { room_id: eachRoomType.id },
+              { $push: { devices: device._id } }
+            );
+          }
 
-        const devicesinType = await Type.find({ devices: device._id });
-        if (devicesinType.length == 0) {
-          await Type.findOneAndUpdate(
-            { name: feed.description },
-            { $push: { devices: device._id } }
-          );
-        }
+          const devicesinType = await Type.find({ devices: device._id });
+          if (devicesinType.length == 0) {
+            await Type.findOneAndUpdate(
+              { name: feed.description },
+              { $push: { devices: device._id } }
+            );
+          }
+        });
       });
-    });
+    }
   } catch (error) {
     console.error(error.message);
   }
