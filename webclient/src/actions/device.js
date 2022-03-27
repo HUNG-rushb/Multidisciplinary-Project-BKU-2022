@@ -16,7 +16,7 @@ export const loadDevices = () => async (dispatch) => {
   }
 };
 
-export const updateStatus = () => async (dispatch) => {
+export const postData = () => async (dispatch) => {
   console.log(' iam here');
   // try {
   //   const res = await axios.get(`${URLs.baseURL}/devices`);

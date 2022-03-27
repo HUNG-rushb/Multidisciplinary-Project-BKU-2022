@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { loadDevices } from '../../actions/device';
 import { loadRooms } from '../../actions/room';
 import { loadTypes } from '../../actions/type';
+
 const TestDashboard = ({
   device: { devices },
   room: { rooms },

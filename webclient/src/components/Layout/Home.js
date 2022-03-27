@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import profile from '../../images/profile.png';
-import Devices from './Devices';
+import DeviceForm from '../Devices/DeviceForm';
 import Warning from './Warning';
 import Dashboard from '../Dashboard/Dashboard';
 
@@ -29,7 +29,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Devices />
+        <DeviceForm />
         <Warning />
       </div>
     </Fragment>
