@@ -12,19 +12,22 @@ setIOkey(io_key);
 
 // Fetch api from Adafruit at Interval of 5 seconds
 const fetchInterval = setInterval(async () => {
+  var startTime = performance.now();
   await getDevices();
   await getRooms();
   await addDevices();
   await getData();
+  var endTime = performance.now();
+  console.log(`${endTime - startTime} milliseconds`);
 }, 5000);
 
-const fetch = async () => {
-  // var startTime = performance.now();
-  // await getDevices();
-  // await getRooms();
-  // await addDevices();
-  // await getData();
-  // var endTime = performance.now();
-  // console.log(`${endTime - startTime} milliseconds`);
-};
+// const fetch = async () => {
+//   var startTime = performance.now();
+//   await getDevices();
+//   await getRooms();
+//   await addDevices();
+//   await getData();
+//   var endTime = performance.now();
+//   console.log(`${endTime - startTime} milliseconds`);
+// };
 module.exports = fetchInterval;

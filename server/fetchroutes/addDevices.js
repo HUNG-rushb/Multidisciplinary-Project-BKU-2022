@@ -11,7 +11,7 @@ const addDevices = async () => {
 
     const responseRoomsTypes = response.data;
 
-    if (responseRoomsTypes.length === 0) {
+    if (responseRoomsTypes.length !== 0) {
       responseRoomsTypes.map(async (eachRoomType) => {
         eachRoomType.feeds.map(async (feed) => {
           const device = await Device.findOne({ device_id: feed.id });

@@ -15,3 +15,18 @@ export const loadDevices = () => async (dispatch) => {
     });
   }
 };
+
+export const updateStatus = () => async (dispatch) => {
+  console.log(' iam here');
+  // try {
+  //   const res = await axios.get(`${URLs.baseURL}/devices`);
+  //   dispatch({
+  //     type: GET_DEVICES,
+  //     payload: res.data,
+  //   });
+  // } catch (error) {
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //   });
+  // }
+};

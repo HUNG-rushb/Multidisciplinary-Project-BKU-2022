@@ -9,7 +9,7 @@ const getRooms = async () => {
 
     const responseRooms = response.data;
 
-    if (responseRooms.length) {
+    if (responseRooms.length !== 0) {
       responseRooms.map(async (eachRoom) => {
         if (!eachRoom.name.includes('Default')) {
           // console.log(eachRoom);

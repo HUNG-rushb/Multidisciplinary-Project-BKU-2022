@@ -13,8 +13,7 @@ const getDevices = async () => {
 
     let tempDevices = [];
     let tempTypes = [];
-
-    if (responseDevices.length === 0) {
+    if (responseDevices.length !== 0) {
       responseDevices.map(async (eachDevice) => {
         const { id, key, name, description, username } = eachDevice;
         const types = await Type.find({ name: description });
