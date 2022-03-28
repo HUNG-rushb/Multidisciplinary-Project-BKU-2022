@@ -1,7 +1,28 @@
-import { View, Text, VStack, HStack, Switch, Box, Icon } from "native-base";
-import { Entypo } from "@native-base/icons";
+import {
+  Text,
+  VStack,
+  HStack,
+  Switch,
+  Box,
+  Icon,
+  IconButton,
+} from "native-base";
+import { MaterialCommunityIcons } from "@native-base/icons";
 
 const SwitchCard = (props) => {
+  let icon;
+  switch (props.description) {
+    case "light":
+      icon = "lightbulb";
+      break;
+    case "fan":
+      icon = "fan";
+      break;
+    default:
+      icon = "temperature-celsius";
+      break;
+  }
+
   return (
     <Box
       bg={{
@@ -17,26 +38,43 @@ const SwitchCard = (props) => {
       rounded="xl"
       minW="85%"
       _text={{
-        fontSize: "md",
-        fontWeight: "medium",
         color: "white",
         textAlign: "left",
       }}
     >
       <HStack justifyContent="space-between">
-        <Icon as={Entypo} name="light-bulb" size="lg" color="white" />
+        <Icon as={MaterialCommunityIcons} name={icon} size="lg" color="white" />
 
         <VStack space={2}>
-          <Text>The Garden City</Text>
+          <Text bold fontSize="lg" textAlign="left" isTruncated>
+            {props.name}
+          </Text>
 
-          <Text>The Silicon Valley of India.</Text>
+          <Text isTruncated>lorem</Text>
         </VStack>
 
-        {/* <Switch
-          defaultIsChecked={false}
-          isChecked={console.log("ok")}
-        /> */}
-        <Switch defaultIsChecked colorScheme="pink" />
+        <HStack>
+          <Switch
+            defaultIsChecked={props.status !== "0" ? true : false}
+            colorScheme="pink"
+            // isChecked={console.log("ok")}
+          />
+
+          <IconButton
+            icon={<Icon as={MaterialCommunityIcons} name="close" size="sm" />}
+            borderRadius="full"
+            _icon={{
+              color: "pink.500",
+              size: "md",
+            }}
+            _hover={{
+              bg: "pink.600:alpha.20",
+            }}
+            _pressed={{
+              bg: "pink.600:alpha.20",
+            }}
+          />
+        </HStack>
       </HStack>
     </Box>
   );
