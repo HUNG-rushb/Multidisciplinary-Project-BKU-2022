@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 
-import {
-  View,
-  Heading,
-  VStack,
-  HStack,
-  ScrollView,
-  Spinner,
-} from "native-base";
+import { View, Heading, VStack, HStack, Spinner } from "native-base";
+import { RefreshControl, ScrollView } from "react-native";
+
 import SwitchCard from "../../components/UI/SwitchCard";
 
 import axios from "axios";
+
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 const LivingroomScreen = (props) => {
   const roomsID = useSelector((state) => state.roomsID);
 
   const [devices, setDevices] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   // https://www.pluralsight.com/guides/fetching-data-updating-state-hooks
   useEffect(() => {
@@ -33,6 +33,13 @@ const LivingroomScreen = (props) => {
     getData();
   }, []); // no dependency => run only 1 time when created  // componentDidMount() {}
 
+  // console.log(devices);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(3000).then(() => setRefreshing(false));
+  }, []);
+
   return (
     <View>
       <Heading size="xl" px="5" pb="3" color="pink.400">
@@ -47,13 +54,26 @@ const LivingroomScreen = (props) => {
           </Heading>
         </HStack>
       ) : (
-        <ScrollView mb="60" showsVerticalScrollIndicator={false}>
+        <ScrollView
+          mb="60"
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              progressBackgroundColor="mistyrose"
+              size="large"
+              colors={["aqua", "greenyellow", "tomato"]}
+            />
+          }
+        >
           <VStack space={4} alignItems="center">
             {devices.map((item, index) => (
               <SwitchCard
                 id={item._id}
                 description={item.description}
                 name={item.name}
+                status={item.data[0].value}
                 key={index}
               />
             ))}

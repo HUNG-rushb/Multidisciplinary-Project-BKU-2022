@@ -45,9 +45,8 @@ const Devices = () => {
         ) : (
           <HStack space={3} justifyContent="center" mx="1">
             {/* {types.map((itemData, index) => (
-                <DeviceCard></DeviceCard>
-              ))} */}
-            <Heading>alo alo alo </Heading>
+              <DeviceCard type={itemData.name}></DeviceCard>
+            ))} */}
           </HStack>
         )}
       </Center>
