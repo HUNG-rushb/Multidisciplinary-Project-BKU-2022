@@ -31,12 +31,12 @@ const getData = async () => {
         });
         await device.save();
 
-        responseData.map(async (eachData) => {
-          const { id, value, created_at } = eachData;
-          await axios.delete(
-            `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}/data/${id}`
-          );
-        });
+        // responseData.map(async (eachData) => {
+        //   const { id, value, created_at } = eachData;
+        //   await axios.delete(
+        //     `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}/data/${id}`
+        //   );
+        // });
       }
     });
   } catch (error) {
