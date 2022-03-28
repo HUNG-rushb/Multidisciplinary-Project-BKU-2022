@@ -1,5 +1,13 @@
-import { View, Text, VStack, HStack, Switch, Box, Icon } from "native-base";
-import { Entypo, MaterialCommunityIcons } from "@native-base/icons";
+import {
+  Text,
+  VStack,
+  HStack,
+  Switch,
+  Box,
+  Icon,
+  IconButton,
+} from "native-base";
+import { MaterialCommunityIcons } from "@native-base/icons";
 
 const SwitchCard = (props) => {
   let icon;
@@ -38,18 +46,35 @@ const SwitchCard = (props) => {
         <Icon as={MaterialCommunityIcons} name={icon} size="lg" color="white" />
 
         <VStack space={2}>
-          <Text bold fontSize="lg">
+          <Text bold fontSize="lg" textAlign="left" isTruncated>
             {props.name}
           </Text>
 
-          <Text>lorem</Text>
+          <Text isTruncated>lorem</Text>
         </VStack>
 
-        {/* <Switch
-          defaultIsChecked={false}
-          isChecked={console.log("ok")}
-        /> */}
-        <Switch defaultIsChecked colorScheme="pink" />
+        <HStack>
+          <Switch
+            defaultIsChecked={props.status !== "0" ? true : false}
+            colorScheme="pink"
+            // isChecked={console.log("ok")}
+          />
+
+          <IconButton
+            icon={<Icon as={MaterialCommunityIcons} name="close" size="sm" />}
+            borderRadius="full"
+            _icon={{
+              color: "pink.500",
+              size: "md",
+            }}
+            _hover={{
+              bg: "pink.600:alpha.20",
+            }}
+            _pressed={{
+              bg: "pink.600:alpha.20",
+            }}
+          />
+        </HStack>
       </HStack>
     </Box>
   );

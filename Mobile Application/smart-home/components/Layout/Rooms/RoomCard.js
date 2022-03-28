@@ -1,7 +1,19 @@
-import { Center, Box, Image, Pressable, Text } from "native-base";
+import { Center, Box, Image, Pressable } from "native-base";
+import { useDispatch } from "react-redux";
 
 const RoomCard = (props) => {
+  const dispatch = useDispatch();
+  // const roomsID = useSelector((state) => state.roomsID);
+
   const pressHandler = () => {
+    // Update store's rooms ID
+    dispatch({
+      type: "update-rooms",
+      newRoomsID: props.roomID,
+    });
+
+    // console.log(roomsID);
+
     props.navigation.navigate({ routeName: props.route });
   };
 

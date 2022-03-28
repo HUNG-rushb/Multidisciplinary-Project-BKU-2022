@@ -1,5 +1,5 @@
 // import { ImageBackground, View, StatusBar } from "react-native";
-import { Divider, Button } from "native-base";
+import { Divider, Text } from "native-base";
 
 import NavBar from "../components/Layout/NavBar";
 import Rooms from "../components/Layout/Rooms/RoomsHS";
@@ -10,9 +10,9 @@ const HomeScreen = (props) => {
 
   return (
     <>
-      {/* <NavBar /> */}
+      <NavBar />
 
-      {/* <Divider my="3" bg="pink.200" thickness="2" /> */}
+      <Divider my="3" bg="pink.200" thickness="2" />
 
       <Rooms navigation={props.navigation} />
 

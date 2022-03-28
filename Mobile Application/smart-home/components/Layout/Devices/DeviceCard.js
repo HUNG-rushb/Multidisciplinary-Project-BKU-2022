@@ -1,25 +1,30 @@
-import {
-  Button,
-  Heading,
-  Center,
-  ScrollView,
-  VStack,
-  HStack,
-  Box,
-  Divider,
-  AspectRatio,
-  Image,
-  Icon,
-  Text,
-} from "native-base";
+import { Button, Icon, Text } from "native-base";
 
-import { Entypo } from "@native-base/icons";
+import { MaterialCommunityIcons } from "@native-base/icons";
 
 const DeviceCard = (props) => {
+  let icon;
+  switch (props.description) {
+    case "light":
+      icon = "lightbulb";
+      break;
+    case "fan":
+      icon = "fan";
+      break;
+    default:
+      icon = "temperature-celsius";
+      break;
+  }
+
   return (
     <Button
       leftIcon={
-        <Icon as={Entypo} name="light-bulb" size="lg" color="pink.300" />
+        <Icon
+          as={MaterialCommunityIcons}
+          name="light-bulb"
+          size="lg"
+          color="pink.300"
+        />
       }
       bgColor="white"
       shadow="9"

@@ -2,7 +2,8 @@ import SmartHomeNavigator from "./navigation/SmartHomeNavigator";
 import { NativeBaseProvider, extendTheme } from "native-base";
 
 // import { createStore, combineReducers } from "redux";
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 // const rootReducer = combineReducers();
 
@@ -40,11 +41,11 @@ const theme = extendTheme({
 
 export default function App() {
   return (
-    // <Provider store={store}>
-    <NativeBaseProvider config={nativebaseConfig} theme={theme}>
-      <SmartHomeNavigator />
-    </NativeBaseProvider>
-    // </Provider>
+    <Provider store={store}>
+      <NativeBaseProvider config={nativebaseConfig} theme={theme}>
+        <SmartHomeNavigator />
+      </NativeBaseProvider>
+    </Provider>
   );
 }
 
