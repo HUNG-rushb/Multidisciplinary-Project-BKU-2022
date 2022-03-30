@@ -18,9 +18,11 @@ const DeviceItem = ({ eachDevice, base_value = 0, postData }) => {
       <h2>{Device.name}</h2>
       <div
         className='turn-on-off'
-        onClick={() => postData(Device.device_id, 1)}
+        onClick={() =>
+          postData(Device.device_id, Device.data[0].value === '51' ? 52 : 51)
+        }
       >
-        {Device.data.length !== 0 && Device.data[0].value === '1' ? (
+        {Device.data.length !== 0 && Device.data[0].value === '51' ? (
           <Fragment>
             <h5 className='active'>On</h5>
             <h5>Off</h5>
