@@ -70,7 +70,7 @@ const LivingroomScreen = (props) => {
           <VStack space={4} alignItems="center">
             {devices.map((item, index) => (
               <SwitchCard
-                id={item._id}
+                id={item.device_id}
                 description={item.description}
                 name={item.name}
                 status={item.data[0].value}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Text,
   VStack,
@@ -8,6 +9,9 @@ import {
   IconButton,
 } from "native-base";
 import { MaterialCommunityIcons } from "@native-base/icons";
+
+import postData from "../../store/actions/postData";
+import axios from "axios";
 
 const SwitchCard = (props) => {
   let icon;
@@ -22,6 +26,17 @@ const SwitchCard = (props) => {
       icon = "temperature-celsius";
       break;
   }
+  const [status, setStatus] = useState(props.status); // '0' '1'
+
+  const onToggleHandler = (id, value) => {
+    postData(id, value);
+
+    await axios
+        .get(
+          `https://bku-ces-iotsmarthouse.herokuapp.com/api/device/${props.id}`
+        )
+        .then((response) => setStatus(response.data.data[0].value));
+  };
 
   return (
     <Box
@@ -50,14 +65,16 @@ const SwitchCard = (props) => {
             {props.name}
           </Text>
 
-          <Text isTruncated>lorem</Text>
+          {/* <Text isTruncated>lorem</Text> */}
         </VStack>
 
         <HStack>
           <Switch
             defaultIsChecked={props.status !== "0" ? true : false}
+            // defaultIsChecked={status !== "0" ? true : false}
             colorScheme="pink"
-            // isChecked={console.log("ok")}
+            // onToggle={console.log("ok")}
+            onToggle={onToggleHandler(props.id, status === '0' ? 1 : 0)}
           />
 
           <IconButton
