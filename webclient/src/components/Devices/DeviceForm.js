@@ -1,24 +1,28 @@
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loadDevices } from '../../actions/device';
+import { loadDevices, fetchData } from '../../actions/device';
 import { SocketContext } from '../../socket';
 import DeviceItem from './DeviceItem';
 
-const DeviceForm = ({ device: { devices }, loadDevices }) => {
+const DeviceForm = ({ device: { devices }, loadDevices, fetchData }) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
     socket.on('newDevice', (device) => {});
 
-    socket.on('updateDevice', (updateDevice) => {
-      loadDevices();
+    socket.on('updateDevice', (ObjectId, updateDevice) => {
+      const UpdatedDevice = {
+        device_id: ObjectId,
+        device_data: updateDevice,
+      };
+      fetchData(UpdatedDevice);
     });
 
     return () => {
       socket.close();
     };
-  }, [socket, loadDevices]);
+  }, [socket]);
 
   return (
     <div className='control-device'>
@@ -35,10 +39,11 @@ const DeviceForm = ({ device: { devices }, loadDevices }) => {
 DeviceForm.propTypes = {
   device: PropTypes.object.isRequired,
   loadDevices: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   device: state.device,
 });
 
-export default connect(mapStateToProps, { loadDevices })(DeviceForm);
+export default connect(mapStateToProps, { loadDevices, fetchData })(DeviceForm);

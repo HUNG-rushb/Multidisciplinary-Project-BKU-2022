@@ -5,6 +5,7 @@ import {
   GET_ERRORS,
   POST_DATA,
   POST_ERROR,
+  UPDATE_DEVICE,
 } from '../actions/types';
 import URLs from '../URLs';
 export const loadDevices = () => async (dispatch) => {
@@ -38,10 +39,10 @@ export const postData = (id, value) => async (dispatch) => {
       config
     );
 
-    dispatch({
-      type: POST_DATA,
-      payload: res.data,
-    });
+    // dispatch({
+    //   type: POST_DATA,
+    //   payload: res.data,
+    // });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
@@ -62,4 +63,11 @@ export const postData = (id, value) => async (dispatch) => {
   //     type: GET_ERRORS,
   //   });
   // }
+};
+
+export const fetchData = (UpdatedDevice) => async (dispatch) => {
+  dispatch({
+    type: UPDATE_DEVICE,
+    payload: UpdatedDevice,
+  });
 };

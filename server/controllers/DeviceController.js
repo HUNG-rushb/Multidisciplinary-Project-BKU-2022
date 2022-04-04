@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 const getDevices = async (req, res) => {
   try {
-    const devices = await Device.find();
+    const devices = await Device.find().select('-_id -__v');
 
     return res.json(devices);
   } catch (error) {
@@ -197,9 +197,11 @@ const addDatatoDevice = async (req, res) => {
           config
         )
         .then(async (success) => {
-          return res.json({ msg: 'New Data has been added' });
+          // return res.json({ msg: 'New Data has been added' });
+          return res.json(success.data);
         })
         .catch((err) => {
+          console.log('error');
           return res
             .status(400)
             .json({ errors: [{ msg: err.response.data.error }] });
