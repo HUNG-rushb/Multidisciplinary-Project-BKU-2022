@@ -25,7 +25,7 @@ const initialFetch = async () => {
             await getData();
             var endTime = performance.now();
             console.log(`${endTime - startTime} milliseconds`);
-          }, 1000);
+          }, 5000);
         }
       }
     }

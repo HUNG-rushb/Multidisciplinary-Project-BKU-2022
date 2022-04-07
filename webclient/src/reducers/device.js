@@ -34,21 +34,21 @@ const deviceReducer = (state = initialState, action) => {
         loading: true,
       };
 
-    // case POST_DATA:
-    //   const newData = {
-    //     data_id: payload.id,
-    //     value: payload.value,
-    //     created_at: payload.created_at,
-    //   };
-    //   console.log(newData);
-    //   return {
-    //     ...state,
-    //     devices: state.devices.map((device) => {
-    //       return device.device_id === payload.feed_id.toString()
-    //         ? { ...device, data: [newData, device.data.slice(-1)] }
-    //         : device;
-    //     }),
-    //   };
+    case POST_DATA:
+      const newData = {
+        data_id: payload.id,
+        value: payload.value,
+        created_at: payload.created_at,
+      };
+      console.log(newData);
+      return {
+        ...state,
+        devices: state.devices.map((device) => {
+          return device.device_id === payload.feed_id.toString()
+            ? { ...device, data: [newData, device.data.slice(-1)] }
+            : device;
+        }),
+      };
 
     case UPDATE_DEVICE:
       return {

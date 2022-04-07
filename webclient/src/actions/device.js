@@ -75,10 +75,10 @@ export const postData = (id, value) => async (dispatch) => {
     );
 
     // ! CURRENT THIS IS NOT USE
-    // dispatch({
-    //   type: POST_DATA,
-    //   payload: res.data,
-    // });
+    dispatch({
+      type: POST_DATA,
+      payload: res.data,
+    });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
