@@ -31,7 +31,7 @@ const App = () => {
     <SocketContext.Provider value={socket}>
       <Provider store={store}>
         <Router>
-          <div className='container '>
+          <div className='container-fluid '>
             <NavBar />
             <Routes>
               <Route path='/' element={<Home />} />

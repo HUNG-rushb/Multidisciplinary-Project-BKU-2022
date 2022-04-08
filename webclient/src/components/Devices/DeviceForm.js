@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loadDevices, fetchData } from '../../actions/device';
+import { fetchData } from '../../actions/device';
 import { SocketContext } from '../../socket';
 import DeviceItem from './DeviceItem';
 
-const DeviceForm = ({ device: { devices }, loadDevices, fetchData }) => {
+const DeviceForm = ({ device: { devices }, fetchData }) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
@@ -38,7 +38,6 @@ const DeviceForm = ({ device: { devices }, loadDevices, fetchData }) => {
 
 DeviceForm.propTypes = {
   device: PropTypes.object.isRequired,
-  loadDevices: PropTypes.func.isRequired,
   fetchData: PropTypes.func.isRequired,
 };
 
@@ -46,4 +45,4 @@ const mapStateToProps = (state) => ({
   device: state.device,
 });
 
-export default connect(mapStateToProps, { loadDevices, fetchData })(DeviceForm);
+export default connect(mapStateToProps, { fetchData })(DeviceForm);

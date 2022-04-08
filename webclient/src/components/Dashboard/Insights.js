@@ -9,13 +9,12 @@ const Insights = () => {
           <div className='left'>
             <h3>Avg House Temp</h3>
           </div>
-          <div className='progress'>
+          <div className='statistics'>
             <div className='text'>
               <h1>25 &deg;C</h1>
             </div>
           </div>
         </div>
-        <small className=''>Last 5 Minutes</small>
       </div>
 
       <div className='humidity'>
@@ -24,13 +23,12 @@ const Insights = () => {
           <div className='left'>
             <h3>Humidity House</h3>
           </div>
-          <div className='progress'>
+          <div className='statistics'>
             <div className='text'>
               <h1>60%</h1>
             </div>
           </div>
         </div>
-        <small className=''>Last 5 Minutes</small>
       </div>
 
       <div className='device'>
@@ -39,13 +37,12 @@ const Insights = () => {
           <div className='left'>
             <h3>0/5</h3>
           </div>
-          <div className='progress'>
+          <div className='statistics'>
             <div className='text'>
               <h1>25 &deg;C</h1>
             </div>
           </div>
         </div>
-        <small className=''>Last 5 Minutes</small>
       </div>
     </div>
   );
