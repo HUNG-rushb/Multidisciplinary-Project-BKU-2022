@@ -10,7 +10,7 @@ import {
 } from "native-base";
 import { MaterialCommunityIcons } from "@native-base/icons";
 
-import postData from "../../store/actions/postData";
+// import postData from "../../store/actions/postData";
 import axios from "axios";
 
 const SwitchCard = (props) => {
@@ -28,14 +28,26 @@ const SwitchCard = (props) => {
   }
   const [status, setStatus] = useState(props.status); // '0' '1'
 
-  const onToggleHandler = (id, value) => {
-    postData(id, value);
+  const onToggleHandler = async (id, value) => {
+    const body = {
+      value: value,
+    };
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
     await axios
-        .get(
-          `https://bku-ces-iotsmarthouse.herokuapp.com/api/device/${props.id}`
-        )
-        .then((response) => setStatus(response.data.data[0].value));
+      .post(
+        `https://bku-ces-iotsmarthouse.herokuapp.com/api/device/${id}`,
+        body,
+        config
+      )
+      .then((response) => console.log("ok"));
+
+    console.log("ok");
   };
 
   return (
@@ -74,7 +86,8 @@ const SwitchCard = (props) => {
             // defaultIsChecked={status !== "0" ? true : false}
             colorScheme="pink"
             // onToggle={console.log("ok")}
-            onToggle={onToggleHandler(props.id, status === '0' ? 1 : 0)}
+            // onToggle={onToggleHandler(props.id, status === "0" ? 1 : 0)}
+            onToggle={onToggleHandler}
           />
 
           <IconButton
