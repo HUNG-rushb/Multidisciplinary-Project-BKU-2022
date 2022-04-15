@@ -16,9 +16,9 @@ const SmartHomeNavigator = createStackNavigator(
       screen: HomeScreen,
     },
 
-    Livingroom: {
-      screen: LivingroomScreen,
-    },
+    // Livingroom: {
+    //   screen: LivingroomScreen,
+    // },
     Kitchen: {
       screen: KitchenScreen,
     },
