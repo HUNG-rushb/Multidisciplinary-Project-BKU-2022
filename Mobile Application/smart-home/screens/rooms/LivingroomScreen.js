@@ -33,7 +33,7 @@ const LivingroomScreen = (props) => {
     getData();
   }, []); // no dependency => run only 1 time when created  // componentDidMount() {}
 
-  // console.log(devices);
+  console.log(devices);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -46,7 +46,7 @@ const LivingroomScreen = (props) => {
         Livingroom
       </Heading>
 
-      {devices.length === 0 ? (
+      {/* {devices.length === 0 ? (
         <HStack space={2} justifyContent="center">
           <Spinner size="lg" color="pink.300" />
           <Heading color="pink.300" fontSize="lg" maxW="50%">
@@ -70,7 +70,7 @@ const LivingroomScreen = (props) => {
           <VStack space={4} alignItems="center">
             {devices.map((item, index) => (
               <SwitchCard
-                id={item._id}
+                id={item.device_id}
                 description={item.description}
                 name={item.name}
                 status={item.data[0].value}
@@ -79,7 +79,7 @@ const LivingroomScreen = (props) => {
             ))}
           </VStack>
         </ScrollView>
-      )}
+      )} */}
     </View>
   );
 };

@@ -67,6 +67,7 @@ const BathroomScreen = (props) => {
             {devices.map((item, index) => (
               <SwitchCard
                 id={item._id}
+                device_id={item.device_id}
                 description={item.description}
                 name={item.name}
                 status={item.data[0].value}

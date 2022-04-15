@@ -1,4 +1,4 @@
-import { Heading, Center, HStack, Spinner } from "native-base";
+import { Heading, Center, HStack, Spinner, ScrollView } from "native-base";
 import { useState, useEffect } from "react";
 
 import DeviceCard from "./DeviceCard";
@@ -26,7 +26,7 @@ const Devices = () => {
     getData();
   }, []); // no dependency => run only 1 time when created  // componentDidMount() {}
 
-  console.log(types);
+  // console.log(types);
 
   return (
     <>
@@ -43,11 +43,13 @@ const Devices = () => {
             </Heading>
           </HStack>
         ) : (
-          <HStack space={3} justifyContent="center" mx="1">
-            {/* {types.map((itemData, index) => (
-              <DeviceCard type={itemData.name}></DeviceCard>
-            ))} */}
-          </HStack>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack space={3} justifyContent="center" mx="1">
+              {types.map((itemData, index) => (
+                <DeviceCard type={itemData.name} key={index} />
+              ))}
+            </HStack>
+          </ScrollView>
         )}
       </Center>
     </>
