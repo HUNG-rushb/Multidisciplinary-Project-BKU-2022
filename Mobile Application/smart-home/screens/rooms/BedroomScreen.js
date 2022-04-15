@@ -37,6 +37,8 @@ const BedroomScreen = (props) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  // console.log(devices);
+
   return (
     <View>
       <Heading size="xl" px="5" pb="3" color="pink.400">
@@ -68,6 +70,7 @@ const BedroomScreen = (props) => {
             {devices.map((item, index) => (
               <SwitchCard
                 id={item._id}
+                device_id={item.device_id}
                 description={item.description}
                 name={item.name}
                 key={index}

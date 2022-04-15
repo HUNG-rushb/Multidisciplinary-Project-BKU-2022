@@ -24,6 +24,8 @@ const Rooms = (props) => {
     getData();
   }, []); // no dependency => run only 1 time when created  // componentDidMount() {}
 
+  // console.log(rooms);
+
   return (
     <Box>
       <Heading size="xl" px="5" pb="3" color="pink.400">

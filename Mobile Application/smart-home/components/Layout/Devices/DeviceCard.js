@@ -11,8 +11,17 @@ const DeviceCard = (props) => {
     case "fan":
       icon = "fan";
       break;
+    case "humi":
+      icon = "water";
+      postfix = "%";
+      break;
+    case "gas":
+      icon = "fire";
+      postfix = "BPM";
+      break;
     default:
       icon = "temperature-celsius";
+      postfix = "℃";
       break;
   }
 
@@ -21,7 +30,7 @@ const DeviceCard = (props) => {
       leftIcon={
         <Icon
           as={MaterialCommunityIcons}
-          name="light-bulb"
+          name={icon}
           size="lg"
           color="pink.300"
         />
@@ -29,6 +38,7 @@ const DeviceCard = (props) => {
       bgColor="white"
       shadow="9"
       py="3"
+      m="3"
     >
       <Text fontSize="xl" bold color="pink.500">
         Light
