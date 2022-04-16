@@ -47,7 +47,7 @@ body {
     overflow-x: hidden;
 }
 
-.container {
+.container-fluid {
     display: grid;
     width: 96%;
     margin: 0 auto;
@@ -57,6 +57,7 @@ body {
 
 a {
     color: var (--color-dark);
+    text-decoration: none;
 }
 
 img {
@@ -163,6 +164,21 @@ aside .sidebar {
 
 aside h3 {
     font-weight: 500;
+}
+
+aside .sidebar >div {
+    display: flex;
+    color: var(--color-info-dark);
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.7rem;
+    transition: all 300ms ease;
+}
+
+aside .sidebar >div h3{
+    margin-top: 10px;
 }
 
 aside .sidebar a {
@@ -326,6 +342,17 @@ main .insights .bathroom {
     transition: all 300ms ease;
     /* opacity: 0.5; */
 }
+main .insights .all {
+    width: auto;
+    background-position: center;
+    background-size: cover;
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    /* opacity: 0.5; */
+}
 
 main .insights>div .middle {
     display: flex;
@@ -415,7 +442,7 @@ main tabletbody tr:last-child td {
     align-items: center;
 }
 
-.right .turn-on-off {
+.turn-on-off {
     background: var(--color-light);
     display: flex;
     justify-content: space-between;
@@ -426,7 +453,22 @@ main tabletbody tr:last-child td {
     border-radius: var(--border-radius-1);
 }
 
-.right .turn-on-off h5 {
+.turn-on-off-range {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 12rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1); 
+}
+
+.turn-on-off-range label{
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+.turn-on-off h5 {
     font-size: 1rem;
     width: 50%;
     height: 100%;
@@ -435,7 +477,7 @@ main tabletbody tr:last-child td {
     justify-content: center;
 }
 
-.right .turn-on-off h5.active {
+.turn-on-off h5.active {
     background: var(--color-primary);
     color: white;
     border-radius: var(--border-radius-1);
@@ -473,6 +515,14 @@ main tabletbody tr:last-child td {
     transition: all 300ms ease;
 }
 
+.right .state .statement .temparute{
+    width: 100%;
+}
+
+.right .state .statement .humidity{
+    width: 100%;
+}
+
 .right .state .statement:hover {
     box-shadow: none;
 }
@@ -501,22 +551,20 @@ main tabletbody tr:last-child td {
     width: 92px;
     height: 92px;
     border-radius: 50%;
+    text-align: center;
 }
 
 .right .state .statement .progress .text {
     color: var(--color-danger);
     font-size: large;
-    position: relative;
+    position: absolute;
     top: 0;
-    left: 50px;
+    /* left: 50px; */
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.right .state .statement .progress .text h1 {
-    font-size: 2.3rem;
 }
 
 .right .control-device {
@@ -539,11 +587,8 @@ main tabletbody tr:last-child td {
     box-shadow: none;
 }
 
-.right .control-device .controls .control {
-    display: grid;
-    grid-template-columns: 30% 40% 40%;
-    gap: 1rem;
-    margin-bottom: 1rem;
+.control {
+    display: inline-block;
 }
 
 .right .control-device .controls .control h2 {
