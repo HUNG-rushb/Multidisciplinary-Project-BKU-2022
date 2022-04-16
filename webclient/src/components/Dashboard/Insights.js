@@ -1,54 +1,52 @@
 import React from 'react';
+import { loadDevicesByFilter } from '../../actions/device';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Insights = () => {
+const Insights = ({ loadDevicesByFilter }) => {
   return (
     <div className='insights'>
-      <div className='temparute'>
-        <span className='material-icons-sharp '>thermostat</span>
+      <div className='livingroom' onClick={(e) => loadDevicesByFilter()}>
         <div className='middle'>
-          <div className='left'>
-            <h3>Avg House Temp</h3>
-          </div>
-          <div className='progress'>
-            <div className='text'>
-              <h1>25 &deg;C</h1>
-            </div>
-          </div>
-        </div>
-        <small className=''>Last 5 Minutes</small>
-      </div>
-
-      <div className='humidity'>
-        <span className='material-icons-sharp'>water_drop</span>
+          <div className='center'>
+            <h3> Living room </h3>{' '}
+          </div>{' '}
+        </div>{' '}
+      </div>{' '}
+      <div className='kitchen' onClick={(e) => loadDevicesByFilter('532752')}>
         <div className='middle'>
-          <div className='left'>
-            <h3>Humidity House</h3>
-          </div>
-          <div className='progress'>
-            <div className='text'>
-              <h1>60%</h1>
-            </div>
-          </div>
-        </div>
-        <small className=''>Last 5 Minutes</small>
-      </div>
-
-      <div className='device'>
-        <span className=' material-icons-sharp '>lightbulb</span>
+          <div className='center'>
+            <h3> Kitchen </h3>{' '}
+          </div>{' '}
+        </div>{' '}
+      </div>{' '}
+      <div className='bedroom' onClick={(e) => loadDevicesByFilter('532750')}>
         <div className='middle'>
-          <div className='left'>
-            <h3>0/5</h3>
-          </div>
-          <div className='progress'>
-            <div className='text'>
-              <h1>25 &deg;C</h1>
-            </div>
-          </div>
-        </div>
-        <small className=''>Last 5 Minutes</small>
-      </div>
+          <div className='center'>
+            <h3> Bedroom </h3>{' '}
+          </div>{' '}
+        </div>{' '}
+      </div>{' '}
+      <div className='bathroom' onClick={(e) => loadDevicesByFilter('532751')}>
+        <div className='middle'>
+          <div className='center'>
+            <h3> Bathroom </h3>{' '}
+          </div>{' '}
+        </div>{' '}
+      </div>{' '}
+      <div className='all' onClick={(e) => loadDevicesByFilter()}>
+        <div className='middle'>
+          <div className='center'>
+            <h3> All </h3>{' '}
+          </div>{' '}
+        </div>{' '}
+      </div>{' '}
     </div>
   );
 };
 
-export default Insights;
+Insights.propTypes = {
+  loadDevicesByFilter: PropTypes.func.isRequired,
+};
+
+export default connect(null, { loadDevicesByFilter })(Insights);

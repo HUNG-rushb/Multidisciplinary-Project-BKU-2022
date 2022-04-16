@@ -3,6 +3,8 @@ import axios from 'axios';
 import {
   GET_DEVICES,
   GET_ERRORS,
+  GET_DEVICE,
+  UPDATE_BOT,
   POST_DATA,
   POST_ERROR,
   UPDATE_DATA,
@@ -20,12 +22,33 @@ export const loadDevices = () => async (dispatch) => {
       type: GET_DEVICES,
       payload: res.data,
     });
+    dispatch({
+      type: GET_DEVICE,
+      payload: res.data,
+    });
   } catch (error) {
     dispatch({
       type: GET_ERRORS,
     });
   }
 };
+export const loadDevicesByFilter =
+  (type = false) =>
+  async (dispatch) => {
+    if (type !== false) {
+      const res = await axios.get(`${URLs.baseURL}/room/${type}/devices`);
+      dispatch({
+        type: GET_DEVICES,
+        payload: res.data,
+      });
+    } else {
+      const res = await axios.get(`${URLs.baseURL}/devices`);
+      dispatch({
+        type: GET_DEVICES,
+        payload: res.data,
+      });
+    }
+  };
 
 export const getDeviceById = (id) => async (dispatch) => {
   try {
@@ -94,6 +117,13 @@ export const fetchData = (UpdatedDevice) => async (dispatch) => {
   dispatch({
     type: UPDATE_DATA,
     payload: UpdatedDevice,
+  });
+};
+
+export const fetchBot = (UpdatedBot) => async (dispatch) => {
+  dispatch({
+    type: UPDATE_BOT,
+    payload: UpdatedBot,
   });
 };
 

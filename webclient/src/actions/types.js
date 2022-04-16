@@ -1,8 +1,10 @@
 export const GET_DEVICES = 'GET_DEVICES';
+export const GET_DEVICE = 'GET_DEVICE';
 export const GET_ROOMS = 'GET_ROOMS';
 export const GET_TYPES = 'GET_TYPES';
 export const GET_ERRORS = 'GET_ERRORS';
 export const UPDATE_DATA = 'UPDATE_DATA';
+export const UPDATE_BOT = 'UPDATE_BOT';
 export const POST_DATA = 'POST_DATA';
 export const POST_ERROR = 'POST_ERROR';
 export const ADD_DEVICE = 'ADD_DEVICE';

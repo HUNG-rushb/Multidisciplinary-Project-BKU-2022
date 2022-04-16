@@ -1,7 +1,10 @@
 import {
   GET_DEVICES,
   GET_ERRORS,
+  UPDATE_DATA,
   UPDATE_DEVICE,
+  UPDATE_BOT,
+  GET_DEVICE,
   POST_DATA,
 } from '../actions/types';
 
@@ -18,6 +21,9 @@ const deviceReducer = (state = initialState, action) => {
   switch (type) {
     case GET_DEVICES:
       payload.forEach((eachDevice) => {
+        if (eachDevice._id) {
+          delete eachDevice._id;
+        }
         delete eachDevice.data.forEach((eachData) => {
           delete eachData._id;
         });
@@ -27,7 +33,21 @@ const deviceReducer = (state = initialState, action) => {
         devices: payload,
         loading: false,
       };
-
+    case GET_DEVICE:
+      payload.forEach((eachDevice) => {
+        if (eachDevice._id) {
+          delete eachDevice._id;
+        }
+        delete eachDevice.data.forEach((eachData) => {
+          delete eachData._id;
+        });
+      });
+      const AIbot = payload.find(({ device_id }) => device_id === '1859634');
+      return {
+        ...state,
+        device: AIbot,
+        loading: false,
+      };
     case GET_ERRORS:
       return {
         ...state,
@@ -40,7 +60,6 @@ const deviceReducer = (state = initialState, action) => {
         value: payload.value,
         created_at: payload.created_at,
       };
-      console.log(newData);
       return {
         ...state,
         devices: state.devices.map((device) => {
@@ -48,9 +67,13 @@ const deviceReducer = (state = initialState, action) => {
             ? { ...device, data: [newData, device.data.slice(-1)] }
             : device;
         }),
+        device:
+          state.device.device_id === payload.feed_id.toString()
+            ? { ...state.device, data: [newData, state.device.data.slice(-1)] }
+            : state.device,
       };
 
-    case UPDATE_DEVICE:
+    case UPDATE_DATA:
       return {
         ...state,
         devices: state.devices.map((device) => {
@@ -59,7 +82,14 @@ const deviceReducer = (state = initialState, action) => {
             : device;
         }),
       };
-
+    case UPDATE_BOT:
+      return {
+        ...state,
+        device:
+          state.device.device_id === payload.device_id
+            ? { ...state.device, data: payload.device_data }
+            : state.device,
+      };
     default:
       return state;
   }
