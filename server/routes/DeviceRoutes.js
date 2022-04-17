@@ -7,6 +7,7 @@ const {
   deleteDevice,
   getDeviceData,
   addDatatoDevice,
+  deleteAdminData,
 } = require('../controllers/DeviceController');
 const express = require('express');
 const router = express.Router();
@@ -30,5 +31,6 @@ router.post(
 );
 router.put('/device/:device_id', updateDevice);
 router.delete('/device/:device_id', deleteDevice);
+router.delete('/admin/device/:device_id', deleteAdminData);
 
 module.exports = router;

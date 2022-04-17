@@ -216,6 +216,53 @@ const addDatatoDevice = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
+
+//  ! delete data in adafruit - Caution needed
+const deleteAdminData = async (req, res) => {
+  try {
+    let device = await Device.findOne({ device_id: req.params.device_id });
+    if (device) {
+      await axios
+        .get(
+          `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}/data`
+        )
+        .then(async (Dataresponse) => {
+          if (Dataresponse.data.length > 30) {
+            const DeviceData = Dataresponse.data.splice(
+              Dataresponse.data.length - 10
+            );
+            DeviceData.map(async (eachData) => {
+              await axios
+                .delete(
+                  `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}/data/${eachData.id}`
+                )
+                .then((success) => {
+                  console.log('Data point delete successful');
+                })
+                .catch((error) => {
+                  return res
+                    .status(400)
+                    .json({ errors: [{ msg: error.message }] });
+                });
+            });
+          }
+          res.json({ msg: 'Data has been deleted' });
+        })
+        .catch((err) => {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: err.response.data.error }] });
+        });
+    } else {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'This device is not existed' }] });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
 module.exports = {
   getDevices,
   getDeviceById,
@@ -224,4 +271,5 @@ module.exports = {
   deleteDevice,
   getDeviceData,
   addDatatoDevice,
+  deleteAdminData,
 };
