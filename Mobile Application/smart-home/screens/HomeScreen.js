@@ -3,7 +3,9 @@ import { Divider } from "native-base";
 
 import NavBar from "../components/Layout/NavBar";
 import Rooms from "../components/Layout/Rooms/RoomsHS";
-import Devices from "../components/Layout/Devices/DevicesVS";
+import Chart from "../components/Home/Chart";
+import Clock from "../components/Home/Clock";
+// import Devices from "../components/Layout/Devices/DevicesVS";
 
 // import { MaterialCommunityIcons } from "@native-base/icons";
 
@@ -37,7 +39,11 @@ const HomeScreen = (props) => {
       >
         <NavBar />
 
-        <Divider my="3" bg="pink.200" thickness="2" />
+
+      <Clock />
+
+      <Divider my="3" bg="pink.200" thickness="2" />
+
 
         <Rooms navigation={props.navigation} />
 
@@ -45,7 +51,9 @@ const HomeScreen = (props) => {
 
       <Divider my="3" bg="pink.200" thickness="2" />
 
-      <Devices />
+      <Chart />
+
+      {/* <Devices /> */}
 
     </>
   );
