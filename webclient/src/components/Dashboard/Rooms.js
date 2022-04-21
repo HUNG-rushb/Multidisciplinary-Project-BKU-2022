@@ -37,13 +37,15 @@ const Rooms = ({ device: { devices }, fetchData, fetchBot, postData }) => {
       } else {
         postData(device_id, 55);
       }
-    } else if (device_id === '1858273') {
-      if (device_value === '54') {
-        postData(device_id, 46);
-      } else {
-        postData(device_id, 54);
-      }
-    } else if (device_id === '1858277') {
+    }
+    //  else if (device_id === '1858273') {
+    //   if (device_value === '54') {
+    //     postData(device_id, 46);
+    //   } else {
+    //     postData(device_id, 54);
+    //   }
+    // }
+    else if (device_id === '1858277') {
       console.log(device_value);
       postData(device_id, device_value);
     }
@@ -137,12 +139,12 @@ const Rooms = ({ device: { devices }, fetchData, fetchBot, postData }) => {
                       <td>
                         <div className='control'>
                           <div
-                            onClick={() =>
-                              changeData(
-                                eachDevice.device_id,
-                                eachDevice.data[0].value
-                              )
-                            }
+                            // onClick={() =>
+                            //   changeData(
+                            //     eachDevice.device_id,
+                            //     eachDevice.data[0].value
+                            //   )
+                            // }
                             className='turn-on-off'
                           >
                             <h5 className='active'>On</h5>
@@ -159,12 +161,12 @@ const Rooms = ({ device: { devices }, fetchData, fetchBot, postData }) => {
                       <td>
                         <div className='control'>
                           <div
-                            onClick={() =>
-                              changeData(
-                                eachDevice.device_id,
-                                eachDevice.data[0].value
-                              )
-                            }
+                            // onClick={() =>
+                            //   changeData(
+                            //     eachDevice.device_id,
+                            //     eachDevice.data[0].value
+                            //   )
+                            // }
                             className='turn-on-off'
                           >
                             <h5>On</h5>

@@ -165,7 +165,10 @@ const getDeviceData = async (req, res) => {
       return res.status(400).json({ errors: [{ msg: 'Device not found' }] });
     }
     // console.log(device.data);
-    const newDataArray = device.data.map(({ value, ...rest }) => value);
+    const newDataArray = device.data.map(({ value, created_at, ...rest }) => ({
+      value,
+      created_at,
+    }));
     return res.json(newDataArray);
   } catch (error) {
     console.error(error.message);

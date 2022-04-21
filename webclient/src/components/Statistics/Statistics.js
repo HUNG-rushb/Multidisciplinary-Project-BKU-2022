@@ -35,7 +35,8 @@ const Statistics = ({ device: { devices, loading }, types }) => {
 
     HumiData = devices
       .find(({ name }) => name === types)
-      .data.map(({ value }) => value);
+      .data.map(({ value }) => value)
+      .reverse();
 
     TimeData = devices
       .find(({ name }) => name === types)
