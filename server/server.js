@@ -58,6 +58,7 @@ connection.once('open', () => {
         const updateFields = change.updateDescription.updatedFields;
         const updateData = updateFields.data;
         const ObjectId = change.fullDocument.device_id;
+        console.log(ObjectId);
         io.of('/api/socket').emit('updateDevice', ObjectId, updateData);
         break;
       // case 'delete':

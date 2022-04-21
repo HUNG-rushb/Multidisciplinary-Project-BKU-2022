@@ -1,5 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { SocketContext } from '../../socket';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +12,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import moment from 'moment';
 import PropTypes from 'prop-types';
+import { fetchData, fetchBot } from '../../actions/device';
 
 ChartJS.register(
   CategoryScale,
@@ -24,11 +25,38 @@ ChartJS.register(
   Legend
 );
 
-const Statistics = ({ device: { devices, loading }, types }) => {
+const Statistics = ({
+  device: { devices, loading },
+  types,
+  fetchData,
+  fetchBot,
+}) => {
   let ChartData;
   let HumiData;
   let TimeData;
-  if (loading === false) {
+
+  const socket = useContext(SocketContext);
+  useEffect(() => {
+    socket.on('updateDevice', (ObjectId, updateDevice) => {
+      console.log('amasdasd');
+      const UpdatedDevice = {
+        device_id: ObjectId,
+        device_data: updateDevice,
+      };
+      console.log(UpdatedDevice);
+      if (UpdatedDevice.device_id === '1859634') {
+        fetchBot(UpdatedDevice);
+      } else {
+        fetchData(UpdatedDevice);
+      }
+    });
+
+    return () => {
+      socket.close();
+    };
+  }, [socket]);
+
+  if (devices.length !== 0) {
     ChartData = devices.filter((eachDevice) => {
       return eachDevice.name === types;
     });
@@ -105,9 +133,11 @@ const Statistics = ({ device: { devices, loading }, types }) => {
 
 Statistics.propTypes = {
   device: PropTypes.object.isRequired,
+  fetchData: PropTypes.func.isRequired,
+  fetchBot: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   device: state.device,
 });
-export default connect(mapStateToProps, {})(Statistics);
+export default connect(mapStateToProps, { fetchData, fetchBot })(Statistics);

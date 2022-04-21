@@ -11,7 +11,7 @@ const getData = async () => {
         `https://io.adafruit.com/api/v2/andrewquang/feeds/${device.key}/data`
       );
 
-      const responseData = response.data.slice(0, 10);
+      const responseData = response.data.slice(0, 10).reverse();
 
       if (responseData.length !== 0) {
         responseData.map(async (eachData) => {
@@ -22,7 +22,7 @@ const getData = async () => {
           }
 
           if (device.data.length == 0) {
-            device.data.unshift(newData);
+            device.data.push(newData);
           }
 
           if (device.data.filter((e) => e.data_id == id).length == 0) {

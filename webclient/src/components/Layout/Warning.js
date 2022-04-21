@@ -5,21 +5,20 @@ import PropTypes from 'prop-types';
 const Warning = ({ device: { devices, loading }, types = 'Gas' }) => {
   let GasDevice;
   let GasData;
-  if (loading === false) {
+  if (devices.length !== 0) {
     GasDevice = devices.filter((eachDevice) => {
       return eachDevice.name === types;
     });
 
     GasData = devices
       .find(({ name }) => name === types)
-      .data.map(({ value }) => value)
-      .reverse();
+      .data.map(({ value }) => value);
   }
 
   return (
     <div className='warning'>
       <h2>Warning</h2>
-      {loading === false && GasDevice && GasData >= '300' ? (
+      {loading === false && GasDevice && GasData[0] >= '300' ? (
         <div className='item'>
           <div className='icon'>
             <span className='material-icons-sharp'>local_fire_department</span>
