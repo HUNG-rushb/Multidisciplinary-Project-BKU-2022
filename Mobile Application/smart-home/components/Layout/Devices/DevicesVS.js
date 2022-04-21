@@ -38,9 +38,9 @@ const Devices = () => {
         {types.length === 0 ? (
           <HStack space={2} justifyContent="center">
             <Spinner size="lg" color="pink.300" />
-            <Heading color="pink.300" fontSize="lg" maxW="50%">
+            {/* <Heading color="pink.300" fontSize="lg" maxW="50%">
               Duma đang fetch data chờ tí đi pa...
-            </Heading>
+            </Heading> */}
           </HStack>
         ) : (
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

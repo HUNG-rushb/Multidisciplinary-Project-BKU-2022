@@ -1,4 +1,4 @@
-import { RefreshControl, ScrollView } from "react-native";
+
 import { Divider } from "native-base";
 
 import NavBar from "../components/Layout/NavBar";
@@ -43,25 +43,10 @@ const HomeScreen = (props) => {
 
         <Divider my="3" bg="pink.200" thickness="2" />
 
-        <Devices />
+      <Divider my="3" bg="pink.200" thickness="2" />
 
-        {/* <IconButton
-          m="3"
-          ml="80"
-          borderRadius="full"
-          bg="indigo.300"
-          variant="solid"
-          p="3"
-          icon={
-            <Icon
-              color="white"
-              name="reload"
-              as={MaterialCommunityIcons}
-              size="sm"
-            />
-          }
-        /> */}
-      </ScrollView>
+      <Devices />
+
     </>
   );
 };
