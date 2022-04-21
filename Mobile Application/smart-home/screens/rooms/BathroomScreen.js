@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 
-import { View, Heading, VStack, HStack, Spinner } from "native-base";
+import { View, Heading, VStack } from "native-base";
 import { RefreshControl, ScrollView } from "react-native";
 import SwitchCard from "../../components/UI/SwitchCard";
 
