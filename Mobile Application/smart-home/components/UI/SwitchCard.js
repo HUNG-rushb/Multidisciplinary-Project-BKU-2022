@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Text,
-  VStack,
-  HStack,
-  Switch,
-  Box,
-  Icon,
-  IconButton,
-} from "native-base";
+import { Text, VStack, HStack, Switch, Box, Icon } from "native-base";
 import { MaterialCommunityIcons } from "@native-base/icons";
 
 import axios from "axios";
@@ -76,9 +68,9 @@ const SwitchCard = (props) => {
     // console.log(status);
   };
 
-  const deleteDevice = () => {
-    console.log("ok");
-  };
+  // const deleteDevice = () => {
+  //   console.log("ok");
+  // };
 
   return (
     <Box
@@ -127,7 +119,7 @@ const SwitchCard = (props) => {
               }}
               // onValueChange={status === "0" ? "1" : "0"}
             />
-            <IconButton
+            {/* <IconButton
               icon={<Icon as={MaterialCommunityIcons} name="close" size="sm" />}
               borderRadius="full"
               _icon={{
@@ -141,7 +133,7 @@ const SwitchCard = (props) => {
                 bg: "pink.600:alpha.20",
               }}
               onClick={deleteDevice}
-            />
+            /> */}
           </HStack>
         ) : (
           <HStack>
