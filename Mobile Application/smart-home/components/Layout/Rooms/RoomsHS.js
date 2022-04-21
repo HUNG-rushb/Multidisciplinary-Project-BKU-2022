@@ -36,6 +36,7 @@ const Rooms = (props) => {
 
   // console.log(rooms);
 
+
   const loadData = () => {
     setRooms([]);
 
@@ -52,6 +53,7 @@ const Rooms = (props) => {
 
     getData();
   };
+
 
   return (
     <Box>
