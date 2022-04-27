@@ -232,7 +232,7 @@ const deleteAdminData = async (req, res) => {
         .then(async (Dataresponse) => {
           if (Dataresponse.data.length > 30) {
             const DeviceData = Dataresponse.data.splice(
-              Dataresponse.data.length - 10
+              Dataresponse.data.length - 30
             );
             DeviceData.map(async (eachData) => {
               await axios
