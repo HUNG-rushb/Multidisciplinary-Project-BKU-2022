@@ -12,3 +12,5 @@ Video demo giữa kì: https://drive.google.com/drive/folders/1Sszs7zHD-AUpHLTZi
 Link App: https://expo.dev/@hung.trinhrushbcyka/smart-home?serviceType=classic&distribution=expo-go
 
 Video Demo App: https://drive.google.com/file/d/1FYWSudKM7GYN2vrjIDBvgg4x3XpSNs0f/view?usp=sharing
+
+APK: https://drive.google.com/file/d/1gLcuPFE543QdRSH4nBMI7vnZK-IFkGqj/view?usp=sharing
