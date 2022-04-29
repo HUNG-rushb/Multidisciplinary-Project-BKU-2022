@@ -85,11 +85,13 @@ const KitchenScreen = (props) => {
               key={index}
               status={item.data[0].value}
             />
+
           ))}
         </VStack>
 
         <Heading></Heading>
       </ScrollView>
+
     </View>
   );
 };
