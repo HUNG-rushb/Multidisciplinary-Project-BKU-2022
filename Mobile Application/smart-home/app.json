@@ -20,7 +20,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#f58ef0"
-      }
+      },
+      "package": "xyz.duyhung.smart_home_BKU",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
